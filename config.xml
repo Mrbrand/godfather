@@ -7,13 +7,13 @@
         
          <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
-        id          = "betarabbit.wiseguy"
-        versionCode = "14" 
-        version     = "1.1.1">
+        id          = "betarabbit.godfather"
+        versionCode = "10" 
+        version     = "1.0.0">
 
     <!-- versionCode is optional and Android only -->
 
-    <name>WiseGuy</name>
+    <name>Godfather</name>
 
     <description>
         Task manager
