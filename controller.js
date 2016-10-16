@@ -75,47 +75,35 @@ $(".more-button").click(function() {
  
 $(".new-issue-button").click(function() {
 	$("#new-item-form").children().show();
-	
+	$("#new-item-form .context").hide();
 	$("#new .menu-title").html("New Project");
-	$('#new-item-form .autovalue').val(""); 
-    $('#new-item-form input[name="type"]').val("7"); 
-	$('#new-item-form input:radio[value=""]').prop('checked', true); 
-	$('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
+	
+	
+	fill_form("#new-item-form", {title:"", type:"7",  icon:"", prio:"6", parent_id:"-"});	
+	
 	$('#new-item-form select[name="category"]').val($("#category_filter").val()); 
 	if($("#category_filter").val() =="*") $('#new-item-form select[name="category"]').val("-"); 
 	
-	$("#new-item-form .context").hide();
 	open_page ("#new");
 });
 
 
 $("#single_issue .new-task-button").click(function() { 
 	$("#new-item-form").children().show();
-	$("#new .menu-title").html("New Task for: "+current_item.title);
-	$('#new-item-form .autovalue').val(""); 
-	$('#new-item-form input[name="type"]').val("6"); 
-	$('#new-item-form input[name="parent_id"]').val(current_item.id); 
-    $('#new-item-form input:radio').prop('checked', false); 
-    $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
-    $('#new-item-form input:radio[value=""]').prop('checked', true); // prio (css trick med bilder)
-	$('#new-item-form select[name="category"]').val(current_item.category); 
-	
 	$("#new-item-form .category_select").hide();
+	$("#new .menu-title").html("New Task for: "+current_item.title);
+	
+	fill_form("#new-item-form", {title:"", type:"6", parent_id: current_item.id,  icon:"", prio:"6", category: current_item.category});		
+	
 	open_page ("#new");
 	
 });
 
 $("#task_list .new-task-button").click(function() { 
 	$("#new-item-form").children().show();
-	$("#new .menu-title").html("New Task: no issue");
-	$('#new-item-form .autovalue').val(""); 
-	$('#new-item-form input[name="type"]').val("6"); 
-	$('#new-item-form input[name="parent_id"]').val("-"); 
-    $('#edit-item-form input:radio').prop('checked', false); 
-    $('#new-item-form input:radio[value="5"]').prop('checked', true); // prio (css trick med bilder)
-    $('#new-item-form input:radio[value=""]').prop('checked', true); // prio (css trick med bilder)
-	$('#new-item-form select[name="category"]').val("-"); 
+	$("#new .menu-title").html("New Task: No project");
 	
+ 	fill_form("#new-item-form", {title:"", type:"6", parent_id:"-", icon:"", prio:"6", category:"-"});		
 	open_page ("#new");
 	
 });
@@ -123,10 +111,7 @@ $("#task_list .new-task-button").click(function() {
 
 
 $(".new-category-button").click(function() { 
-	$('#new-category-form .autovalue').val(""); 
-	$('#new-category-form input[name="type"]').val("13"); 
-	$('#new-category-form input[name="parent_id"]').val(""); 
-    	
+    fill_form("#new-category-form", {title:"", type:"13", icon:""});	
 	open_page ("#new-category");
 	
 });
@@ -174,18 +159,9 @@ $(".issue-list-button").click(function() {
 $(document).on('click', ".task .subitem-left, .issue .subitem-left", function() {
 	id = $(this).parent().find(".item_id").text();
 	item = itemList.get_item(id);
-
+	
 	$("#edit .menu-title").html("Edit: "+item.title);
-    
-    $('#edit-item-form input:radio').prop('checked', false); 
-    $('#edit-item-form input:radio[value="'+item.prio+'"]').prop('checked', true); // prio (css trick med bilder)
-    $('#edit-item-form input:radio[value="'+item.icon+'"]').prop('checked', true); // prio (css trick med bilder)
-	
-	
-    for (var key in item) {
-        $('#edit-item-form .autovalue[name="'+key+'"]').val(item[key]);
-    }
-      
+    fill_form("#edit-item-form", item);
     open_page ("#edit");
 });
 
@@ -196,11 +172,7 @@ $(document).on('click', ".category .subitem-left", function() {
 	item = itemList.get_item(id);
 
 	$("#edit-category .menu-title").html("Edit: "+item.title);
-	
-    for (var key in item) {
-        $('#edit-category-form .autovalue[name="'+key+'"]').val(item[key]);
-    }
-      
+    fill_form("#edit-category-form", item);
     open_page ("#edit-category");
 });
 
@@ -210,7 +182,7 @@ $(document).on('click', ".issue .subitem-center", function() {
 	current_item = itemList.get_item(id);
 
 	$("#single_issue .menu-title").text(current_item.title);
-	
+
 	open_page("#single_issue");
 	//view_single_issue(id);
 });

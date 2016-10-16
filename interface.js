@@ -63,6 +63,7 @@ function open_page (page_id, show_extra) {
 function view_issue_list(){ 	
     var query = $(".search").val().toLowerCase();
     var category = $("#category_filter").val();
+    var prio_filter = $("#prio_filter").val();
     var show_postponed = $('#show_postponed').prop("checked");
     if($('#debug').prop("checked")) debug.begin("Issues");
     
@@ -71,7 +72,8 @@ function view_issue_list(){
 		.query("finish_date", "==", "")
     	.query("title, notes", "contains", query);
     	
-    	if (query=="" & category=="*") open_items = open_items.query("prio", "<" ,4);
+    if (query=="" & category=="*") open_items = open_items.query("prio", "<" ,prio_filter);
+      	
       
     if(category!="*") open_items=open_items.query("category", "==", category);
     if(!show_postponed) open_items=open_items.query("postpone", "==", "");
@@ -221,24 +223,26 @@ function set_categories(){
 
 function mustache_output(output_id, items, template_id, group_by){
     var new_group = "";
+    var html="";
+ 	
     $(output_id).empty();
- 
+ 	
     items.forEach(function(item) {
 		if(group_by){
 			if (item[group_by]!= new_group)  {
 				
-				prio_item_count = items.query(group_by,"==",item[group_by]).query("postpone","==","").length;
-				$(output_id).append("<div style='padding:3px; background:#333;color:#AAA;'>"+prio_item_count+"<img src='img/prio"+item[group_by]+".png'></div>");
+				prio_item_count = items.query(group_by,"==",item[group_by]).length;
+				html += "<div style='padding:3px; background:#333;color:#AAA;'>"+prio_item_count+"<img src='img/prio"+item[group_by]+".png'></div>";
 		   	}
 			new_group=item[group_by]; 
 		}
 		
 		item_meta = item_with_meta(item.id);
 		var template = $(template_id).html();
-		var html = Mustache.to_html(template, item_meta);
-		$(output_id).append(html);
-		
+		html += Mustache.to_html(template, item_meta);
 	});
+	if($('#debug').prop("checked")) debug.comment("html sträng klar");
+	$(output_id).append(html);
 }
 
 
@@ -263,3 +267,18 @@ function item_with_meta(id){
 	
 	return item;
 }
+
+function fill_form(form_id, item){
+	var elements = $(form_id).find(".autovalue");
+	
+	$(form_id + ' input:radio').prop('checked', false); 
+    $(form_id + ' input:radio[value="'+item['icon']+'"]').prop('checked', true); // prio (css trick med bilder)
+	$(form_id + ' input:radio[value="'+item['prio']+'"]').prop('checked', true); // prio (css trick med bilder)
+
+	elements.each(function(test, element ) {
+  		var name = element.getAttribute("name");
+  			$(element).val(item[name]);
+	});
+}
+
+
