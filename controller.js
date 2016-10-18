@@ -16,6 +16,11 @@ $(".cancel-button").click(function() {
     open_page(previous_page);
 }); 
 
+// x:et i sökrutan
+$('input[type=search]').on('search', function () {
+     open_page("#issues");
+});
+
 $("#category_filter").change(function() { 
     if($(this).val()=="edit") open_page("#category_list");
     else open_page("#issues");
@@ -33,7 +38,7 @@ $("#issues .search").focus(function() {
 $(document).on('click', ".tag-button", function() {
     console.log("hej");
     var tag = $(this).html();
-    $("#issues .search").val(tag.substring(0,tag.indexOf("(")));
+    $("#issues .search").val(tag.substring(0,tag.indexOf(" (")));
     open_page("#issues");
 }); 
  
