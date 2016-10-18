@@ -6,6 +6,7 @@ var previous_page = "";
 var scroll_positions = [];
 var current_item={};
 var debug = new Timer();
+var tags = [];
 
 var items = itemList.get_all();
 
@@ -65,7 +66,9 @@ function view_issue_list(){
     var category = $("#category_filter").val();
     var prio_filter = $("#prio_filter").val();
     var show_postponed = $('#show_postponed').prop("checked");
-    if($('#debug').prop("checked")) debug.begin("Issues");
+    tags = [];
+    
+    if($('#debug').prop("checked")) debug.begin("Issues"); //debug timer
     
     var open_items=itemList.get_all()
    		.query("type", "==", 7)
@@ -78,18 +81,31 @@ function view_issue_list(){
     if(category!="*") open_items=open_items.query("category", "==", category);
     if(!show_postponed) open_items=open_items.query("postpone", "==", "");
     
-    if($('#debug').prop("checked")) debug.comment("filter klar");
+    if($('#debug').prop("checked")) debug.comment("filter klar"); //debug timer
     
     open_items.sort(
         firstBy("prio")
         .thenBy("postpone") 
         .thenBy("update_date", -1));
 	
-	if($('#debug').prop("checked")) debug.comment("sortering klar");
+	//tags 
+	open_items.forEach(function(item) {
+		catch_tags(item.notes, tags);
+	});
+ 	tags.sort(firstBy("count",-1));
+ 	console.log(tags);
+ 	tags.forEach(function(tag) {
+		$("#tags").append(Mustache.to_html($("#tags_template").html(), tag));
+	});
+
+ 	
+ 	
+		
+	if($('#debug').prop("checked")) debug.comment("sortering klar"); //debug timer
 	
 	mustache_output("#filtered", open_items, "#issue_template", "prio");
 	
-	if($('#debug').prop("checked")) debug.comment("output klar");
+	if($('#debug').prop("checked")) debug.comment("output klar"); //debug timer
 	
   	//om inga items hittas
 	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
@@ -241,7 +257,7 @@ function mustache_output(output_id, items, template_id, group_by){
 		var template = $(template_id).html();
 		html += Mustache.to_html(template, item_meta);
 	});
-	if($('#debug').prop("checked")) debug.comment("html sträng klar");
+	//if($('#debug').prop("checked")) debug.comment("html sträng klar");
 	$(output_id).append(html);
 }
 
@@ -281,4 +297,26 @@ function fill_form(form_id, item){
 	});
 }
 
+function catch_tags(str, list){
+  while(str.indexOf("#")>=0){
+  var start = str.indexOf("#");
+  var tag = "";
+    str = str.substring(start);
+  var end = str.indexOf(" ");
+  if (end <=0) {
+    tag = str;
+    str = "";
+  }
+  else {
+    tag = str.substring(0,end);
+    str = str.substring(end);
+  } 
+  //console.log(list);
+    if(list.query("tag","==",tag).length==0)
+    list.push({tag:tag, count:1});
+  else 
+    list.query("tag","==",tag)[0].count++;
+    //list.push(tag);
+  }
+}
 

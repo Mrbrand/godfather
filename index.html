@@ -59,60 +59,15 @@
 			
 		<! Controls>
 			<div class="controls" style="height:40px; padding: 5px;">
-                
                 <input class="search" onkeyup="view_issue_list();" type="search" placeholder="Search..." value="" style="width:100px; float:left; margin-left:5px;"/>
-                	
-					
-				
                 <button class="new-issue-button" style="float:right;">New project</button>
             </div><!-- end controls-->
             
-        <! Controls categories>
-            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px; display:none;">
-                <div id="prefefined" style="float:left;"></div>
-                <button class="path-button" onclick="$('#controls-title').toggle();" style="float:right;margin-left:5px;">...</button>
+        <! Controls for tags>
+            <div id="controls-tags" class="controls-extra" style="height:40px; padding: 5px; display:none;">
+                <div id="tags" style="float:left;"></div>
             </div><!-- end controls categories-->
-       
-        <! Controls context>
-            <div id="controls-context" class="controls-extra" style="height:40px; padding: 5px;display:none;">    
-            	
-            </div><!-- end controls context-->
-            
-        <!Title-filter>
-            <div id="controls-title" class="controls-extra" style="display:none;">
-               
-               
-                <button onclick=" $('.type-filter').val('4'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type4.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type6.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('7'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type7.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('5'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type5.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('15'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type15.png" height="16"/></button>
-                <input class="type-filter" placeholder="Type" style="width:50px; margin-left:5px;"/>
-                
-                 <select style="float:right;margin-left:5px;width:40px;" class="prio-filter" onchange="view_filter();">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5" selected>5</option>
-                    <option value="6">6</option>
-                </select>
-                
-                 <button class="status-button" onclick="togggleStatus();" style="float:right;margin-left:5px;">Status</button>
-                 <input class="path-filter" type="text" onkeyup="view_filter();" placeholder="Path string" value="" style="width:70px; margin-right:5px;"/>
-                 <input class="context-filter" type="text" onkeyup="view_filter();" placeholder="Context icon" value="" style="width:70px; margin-right:5px;"/>
-                
-            </div><!-- end controls-->
-            
-            
-            <!Status-filter>
-            <div id="controls-status" style="display:none;" >
-                <select class="status-filter" onchange="view_filter();">
-    				<option value="open">Status: Open</option>
-					<option value="finished">Status: Finished</option>
-				</select>
-            </div><!-- end controls-->
-			
+      
 			<!-- ItemLista -->
 			<div id="items">
 				<div id="filtered"></div>
@@ -145,57 +100,10 @@
 			
 		<! Controls>
 			<div class="controls" style="height:40px; padding: 5px;">
-                
                 <input class="search_task" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:100px; float:left; margin-left:5px;"/>
-                
                 <button class="new-task-button" style="float:right;">New task</button>
             </div><!-- end controls-->
             
-        <! Controls context>
-            <div id="controls-path" class="controls-extra" style="height:40px; padding: 5px; display:none;">
-                
-            </div><!-- end controls categories-->
-       
-        <! Controls context>
-            <div id="controls-context" class="controls-extra" style="height:40px; padding: 5px;display:none;">    
-            	
-            </div><!-- end controls context-->
-            
-        <!Title-filter>
-            <div id="controls-title" class="controls-extra" style="display:none;">
-               
-               
-                <button onclick=" $('.type-filter').val('4'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type4.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('6'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type6.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('7'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type7.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('5'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type5.png" height="16"/></button>
-                <button onclick=" $('.type-filter').val('15'); view_filter();" style="float:left; margin-left:5px;"><img src="img/type15.png" height="16"/></button>
-                <input class="type-filter" placeholder="Type" style="width:50px; margin-left:5px;"/>
-                
-                 <select style="float:right;margin-left:5px;width:40px;" class="prio-filter" onchange="view_filter();">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5" selected>5</option>
-                    <option value="6">6</option>
-                </select>
-                
-                 <button class="status-button" onclick="togggleStatus();" style="float:right;margin-left:5px;">Status</button>
-                 <input class="path-filter" type="text" onkeyup="view_filter();" placeholder="Path string" value="" style="width:70px; margin-right:5px;"/>
-                 <input class="context-filter" type="text" onkeyup="view_filter();" placeholder="Context icon" value="" style="width:70px; margin-right:5px;"/>
-                
-            </div><!-- end controls-->
-            
-            
-            <!Status-filter>
-            <div id="controls-status" style="display:none;" >
-                <select class="status-filter" onchange="view_filter();">
-    				<option value="open">Status: Open</option>
-					<option value="finished">Status: Finished</option>
-				</select>
-            </div><!-- end controls-->
-			
 			<!-- ItemLista -->
 			<div id="items">
 				<div id="tasks"></div>
@@ -739,15 +647,8 @@
 	</div><!-- end subitem  -->
 </script>	
 
-<script id="filter_buttons_template" type="text/template">
-    <button onclick="$('.context-filter').val('{{slot1}}'); $('.status-filter').val('open'); view_filter();">{{slot1}}</button>
-    <button onclick="$('.context-filter').val('{{slot2}}'); $('.status-filter').val('open'); view_filter();">{{slot2}}</button>
-    <button onclick="$('.context-filter').val('{{slot3}}'); $('.status-filter').val('open'); view_filter();">{{slot3}}</button>
-    <button onclick="$('.context-filter').val('{{slot4}}'); $('.status-filter').val('open'); view_filter();">{{slot4}}</button>
-    <button onclick="$('.context-filter').val('{{slot5}}'); $('.status-filter').val('open'); view_filter();">{{slot5}}</button>
-    <button onclick="$('.context-filter').val('{{slot6}}'); $('.status-filter').val('open'); view_filter();">{{slot6}}</button>
-    <button onclick="$('.context-filter').val('{{slot7}}'); $('.status-filter').val('open'); view_filter();">{{slot7}}</button>
-    <button onclick="$('.context-filter').val('{{slot8}}'); $('.status-filter').val('open'); view_filter();">{{slot8}}</button>
+<script id="tags_template" type="text/template">
+	<button class="tag-button">{{tag}} ({{count}})</button>
 </script>	
 
 <script id="category_input_template" type="text/template">

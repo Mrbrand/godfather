@@ -22,6 +22,21 @@ $("#category_filter").change(function() {
 }); 
  
  
+$("#issues .search").focus(function() { 
+    $("#controls-tags").show();
+}); 
+ 
+ $("#issues .search").blur(function() { 
+    $("#controls-tags").fadeOut(200);
+}); 
+ 
+$(document).on('click', ".tag-button", function() {
+    console.log("hej");
+    var tag = $(this).html();
+    $("#issues .search").val(tag.substring(0,tag.indexOf("(")));
+    open_page("#issues");
+}); 
+ 
 $(".delete-button").click(function() {
 	id = $(current_page+" form .item-id").val();
     if (confirm('Delete "'+itemList.get_item(id).title+'"?')==true) {
@@ -133,9 +148,10 @@ $(".save-button").click(function() {
    
 });
 
-$("#show_postponed").change(function() { 
+/*$("#show_postponed").change(function() { 
     open_page("#issues");
 }); 
+*/
 
 
 // swipe back
