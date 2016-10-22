@@ -137,7 +137,7 @@ function view_task_list(){
         .thenBy("update_date", -1)
 	);
 
-	mustache_output("#tasks", open_items, "#filtered_task_template");
+	mustache_output("#tasks", open_items, "#filtered_task_template", "prio");
 
   	//om inga items hittas
 	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
