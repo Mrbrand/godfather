@@ -28,7 +28,7 @@ Sortable.create(document.getElementById('categories'), {handle: '.subitem-right'
 }});
 
 set_categories();
-view_issue_list();
+open_page("#issues");
 
 
 
@@ -41,17 +41,17 @@ function open_page (page_id, show_extra) {
 	
 	console.log(scroll_positions);
 	
-	if(page_id == "#category_list") view_menu();
+	if(page_id == "#category_list") view_category_list();
 	else if(page_id == "#issues") view_issue_list();
 	else if(page_id == "#single_issue") view_single_issue(current_item.id);
 	else if(page_id == "#task_list") view_task_list();
+	else if(page_id == "#menu") view_settings(); 
 	
 	console.log(page_id);
 	
 	$(".page").hide();
 	$(page_id).show();
-	
-	
+
 	if(page_id == "#task_list" || page_id == "#issues" )  $("body").scrollTop(scroll_positions[page_id]);
 	else window.scrollTo(0, 0);
 	
@@ -110,10 +110,6 @@ function view_issue_list(){
 	
   	//om inga items hittas
 	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
-    
-    $(".page").hide();
-	$("#issues").show();
-	view = "issue_list";
 
 	if($('#debug').prop("checked")) debug.stop();
 
@@ -145,10 +141,7 @@ function view_task_list(){
 
   	//om inga items hittas
 	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
-	
-	$(".page").hide();
-	$("#task_list").show();
-	view = "task_list";
+
 }
 
 
@@ -170,28 +163,39 @@ function view_single_issue (id) {
     
     // om listan är tom
     if (open_items.length==0 && finished_items.length == 0) $("#open").append("<div class='empty'>No items</div>");
-    
-    // byta sida 
-	$(".page").hide();
-	$("#single_issue").show();
-	view = "single_issue";
+
 	current_item = itemList.get_item(id);
 }
 
 
 
-function view_menu() {
-	view = "menu";
+function view_category_list() {
     var categories=itemList.get_all()
     	.query("type", "==", 13)
 		.sort(firstBy("order").thenBy("update_date", -1) );
     
     mustache_output("#categories", categories, "#category_template");
-	
-    $(".page").hide();
-	$("#category_list").show();
 }
 
+
+function view_settings(){
+    
+    var field1 = $("#field1").val().toLowerCase();
+    var op1 = $("#op1").val();
+    var value1 = $("#value1").val();
+    var field2 = $("#field2").val().toLowerCase();
+    var op2 = $("#op2").val();
+    var value2 = $("#value2").val();
+    var items=itemList.get_all();
+    	
+    if(field1!="") items = items.query(field1, op1, value1);
+    if(field2!="") items = items.query(field2, op2, value2);
+    //console.log(items.length+" items");
+    
+    $("#export_count").html(items.length+" items<br/>");
+    $("#export_count").append(items.query("finish_date", "==", "").length+" unfinished items<br/>");
+    $("#export_count").append(items.query("finish_date", "!=", "").length+" finished items");
+}
 
 
 

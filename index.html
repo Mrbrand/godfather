@@ -126,7 +126,7 @@
 	<!--Sub-meny-->
 	<div class="controls">
 		<!--button class="home-button"><img src="img/home16.png"</button-->
-		<button class="back-button" style="float:left;">Back</button>
+		<button onclick="open_page('#issues');" style="float:left;">Back</button>
         <button class="new-task-button" style="float:right;">New task</button>
         
         <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
@@ -157,7 +157,7 @@
 	
 	<!--Sub-meny-->
 	<div class="controls">
-		<button class="back-button">Back</button>
+		<button onclick="set_categories(); open_page('#issues');">Back</button>
         <button class="new-category-button" style="float:right;">New category</button>
 	</div><!-- end controls-->
 	
@@ -446,7 +446,7 @@
 
 	
 
-<!MENU >
+<!Settings >
 		<div id="menu" class="page" style="display:none;">
 			
             <div class="header">
@@ -455,7 +455,7 @@
 			
 			<!--Sub-meny-->
 			<div class="controls">
-				<button class="back-button">Back</button>
+				<button onclick="open_page('#issues');">Back</button>
 			</div><!-- end controls-->
             
             <input id="debug" type="checkbox" style="width:25px; float:left; margin-left:5px;">
@@ -470,10 +470,34 @@
 				<span style="color:gray; margin-left:3px; font-size:9pt;">prio filter</span>
             	<br/><br/>
             
-           	<button id="export-button">Export All</button><br/><br/>
-           	<button id="export-subtree-button">Export Subtree</button><br/><br/>
+            Export filter <br/>
+            <input id="field1" style="width:100px">
+            <select id="op1" style="width:50px;">
+					<option value="==">==</option>
+					<option value="!=">!=</option>
+					<option value="contains">contains</option>
+					<option value="<"><</option>
+					<option value=">">></option>
+				</select>
+			<input id="value1" style="width:100px"><br/>
+			<input id="field2" style="width:100px">
+            <select id="op2" style="width:50px;">
+					<option value="==">==</option>
+					<option value="!=">!=</option>
+					<option value="contains">contains</option>
+					<option value="<"><</option>
+					<option value=">">></option>
+				</select>
+			<input id="value2" style="width:100px"><br/>
+			
+           	<button onclick="view_settings();">Refresh</button><br/><br/>
+           	<div id="export_count"></div>
+           	<button id="export-button">Export</button><br/><br/>
+           	
+           	
+           	
            	<textarea id="import" style="width:70px;" /></textarea>
-           	<button id="import-button">Import</button>
+           	<br/><button id="import-button">Import</button>
             
             
 		</div><!-- end menu--> 

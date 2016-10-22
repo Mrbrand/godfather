@@ -7,10 +7,8 @@ $(".add-button").click(function() {
 
 
 $(".back-button").click(function() { 
-	if(view == "menu") set_categories();
-     open_page("#issues");
+	 open_page(previous_page);
 });
-
 
 $(".cancel-button").click(function() { 
     open_page(previous_page);
@@ -52,7 +50,19 @@ $(".delete-button").click(function() {
 
 
 $("#export-button").click(function() { 
-    var items = itemList.get_all().query("finish_date", "==", "");
+    
+   	var field1 = $("#field1").val().toLowerCase();
+    var op1 = $("#op1").val();
+    var value1 = $("#value1").val();
+    var field2 = $("#field2").val().toLowerCase();
+    var op2 = $("#op2").val();
+    var value2 = $("#value2").val();
+    var items=itemList.get_all();
+    
+    var items=itemList.get_all();
+    if(field1!="") items = items.query(field1, op1, value1);
+    if(field2!="") items = items.query(field2, op2, value2);
+ 
     var items_string = JSON.stringify(items);
     $("#export").html(items_string);
     $(".page").hide();
@@ -147,10 +157,8 @@ $("#task_list input[name='icon']").click(function() {
 
 
 $(".save-button").click(function() {
-    console.log(view);
     itemList.edit_from_form(current_page+" form");
      open_page(previous_page);
-   
 });
 
 /*$("#show_postponed").change(function() { 
@@ -162,6 +170,11 @@ $(".save-button").click(function() {
 // swipe back
 $("#single_issue").on('swiperight',  function(){ 
 	open_page("#issues");
+});
+
+// swipe back settings
+$("#export").on('swiperight',  function(){ 
+	open_page("#menu");
 });
 
 
