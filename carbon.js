@@ -16,7 +16,7 @@ function Carbon(key){
 // get_all
 Carbon.prototype.get_all = function() {
     return this.itemArray;
-    console.log("get_all");
+    //console.log("get_all");
 };
 
 
@@ -129,6 +129,19 @@ Carbon.prototype.set_item_field = function(id, field, value) {
 	this.save();
 };
 
+Carbon.prototype.import_json = function(json) {
+    
+    //console.log(this.itemArray);
+    //console.log(json);
+    var items = JSON.parse(json);
+    //console.log(items);
+ 	
+ 	for (i = 0; i < items.length; i++) { 
+    	this.itemArray.push(items[i]);
+    	console.log(items[i]);
+    }
+    this.save();
+};
 
 
 /* ******************************************************************/

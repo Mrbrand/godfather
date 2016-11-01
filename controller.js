@@ -89,8 +89,15 @@ $(".finish-button").click(function() {
  
  
 $("#import-button").click(function() { 
-    if (confirm('All current_item data will be deleted?')==true) {
-        window.localStorage.setItem(itemList.storageKey, $('#import').val());
+    var items = JSON.parse($('#import').val());
+    if (confirm('Add '+items.length+' items?')==true) {
+        //window.localStorage.setItem(itemList.storageKey, $('#import').val());
+       	console.log(JSON.parse($('#import').val()));
+       	/*
+       	console.log(JSON.parse('[{"title":"Engagemang","type":"13","prio":"6","postpone":"","notes":"","id":"4","parent_id":"0","order":3,"repeat":"","icon":"📢","start_date":"2016-03-12 15:24:37","update_date":"2016-03-12 15:25:59","finish_date":"","path":"//","subitems":[{"title":"Sjöbis fixarlista","type":"7","postpone":"2016-09-13 Tue","prio":"2","icon":""}],"category":"-"},{"title":"Personligt","type":"13","prio":"6","postpone":"","notes":"","id":"3","parent_id":"0","order":2,"repeat":"","icon":"🙋","start_date":"2016-03-12 15:24:12","update_date":"2016-04-03 18:40:09","finish_date":"","path":"//","subitems":[],"category":"-"},{"title":"Solvik","type":"13","prio":"6","postpone":"","notes":"","id":"1","parent_id":"0","order":1,"repeat":"","icon":"🌄","start_date":"2016-03-12 13:40:23","update_date":"2016-04-06 12:48:08","finish_date":"","path":"//","subitems":[{"title":"Adrian","type":"7","postpone":"","prio":"5","icon":""}],"category":"-"},{"title":"Hemmet","type":"13","icon":"🏡","prio":"6","postpone":"","notes":"","id":"2","parent_id":"0","order":0,"repeat":"","start_date":"2016-03-12 13:40:26","update_date":"2016-05-06 11:06:44","finish_date":"","path":"//","subitems":[],"category":"-"}]'));
+       	*/
+       	itemList.import_json($('#import').val());     
+       	console.log(itemList.itemArray);  	
        	open_page("#issues");
     }
 });
