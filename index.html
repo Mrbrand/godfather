@@ -10,9 +10,6 @@
 		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
 		<link rel="apple-touch-icon" href="img/icon.png"/>
         <link rel="icon" type="image/png" href="http://betarabbit.com/wiseguy/img/target.png">
-        
-        <link rel="stylesheet" href="awesomplete/awesomplete.css" />
-        <script src="awesomplete/awesomplete.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="style.css"/>
 		<link rel="stylesheet" type="text/css" href="carbon.css"/>
@@ -611,7 +608,7 @@
 </script>	
 	
 	
-<!-- Mustache template task-->
+<!-- Mustache template filtered task-->
 <script id="filtered_task_template" type="text/template">
 	<div class="item task {{#postpone}} postponed{{/postpone}}">
 						
@@ -625,7 +622,7 @@
 		
 		<div class="subitem-center">
 			<div class="title" style="">{{title}}</div>
-			<div class="path" style="">{{parent_title}}</div>
+			<div class="parent" style="">{{parent_title}}</div>
 			<div class="next_action_div" style="float:left;">
 				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
 				{{#notes}}<div class="notes">{{notes}}</div>{{/notes}}
@@ -643,7 +640,7 @@
 </script>	
 
 
-<!-- Mustache template öppna tasks-->
+<!-- Mustache template category <-->
 <script id="category_template" type="text/template">
 	<div class="item category {{#postpone}} postponed{{/postpone}}">
 						
