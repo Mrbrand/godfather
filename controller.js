@@ -74,11 +74,11 @@ $(".finish-button").click(function() {
         item = itemList.get_item($("#edit-item-form .item-id").val());
         itemList.edit_from_form("#edit-item-form");
         
-        /*if(item.repeat){
-            var item_copy = itemList.copy_item(item.id);
-            item_copy["postpone"] = moment().add( item.repeat, 'days').format('YYYY-MM-DD');      
+        if(item.repeat){
+            var item_copy = itemList.copy(item.id);
+            item_copy["postpone"] = moment().add( item.repeat, 'days').format('YYYY-MM-DD');   
+            //itemList.add_item(item_copy);   
         }
-        */
         
 	    itemList.set_item_field(item.id, "finish_date", moment().format('YYYY-MM-DD HH:mm:ss'))
 	            

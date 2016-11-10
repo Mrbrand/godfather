@@ -28,7 +28,7 @@ Sortable.create(document.getElementById('categories'), {handle: '.subitem-right'
 }});
 
 set_categories();
-open_page("#issues");
+open_page("#task_list");
 
 
 

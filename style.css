@@ -70,12 +70,11 @@ label > input:checked + span{ /* (CHECKED) IMAGE STYLES */
 .title{overflow: hidden;    font-weight:bold;     float:left;    display: block;    width:100%;}
 .notes {font: italic 10px Arial;    color: #999;     margin-right:5px;   white-space: pre-line; }
 .postpone {font: italic 10px Arial;    color: CadetBlue;    margin-right:5px;   background:#678; padding:2px;}
-.subitem-next-action{color:#484; float: left;  display: block;  height: 17px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 .subitem-notes {float: left;  display: block;  font-size: 8pt;  height: 15px; overflow: hidden; width:200px; text-overflow:ellipsis; white-space:nowrap;}
 .next_action {font-size:10px;  color: #399;  height: 12px; overflow: hidden;}  
 .task_notes {font-size: 8pt;  color: #999;  height: 15px; overflow: hidden;}  
 .finish_date{ font-size:10px;  color: #974;  height: 12px; overflow: hidden;font-weight:bold;}  
-.postponed{ background:  -webkit-linear-gradient(#DDF, #BBE);}
+.item.postponed{ background:  -webkit-linear-gradient(#BBF, #88A);}
 .notes{color:#88A;}
 .next_action{color: #A96;}
  .parent{font-size:9px;color:#AA6;}
