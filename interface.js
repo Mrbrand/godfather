@@ -66,7 +66,7 @@ function view_issue_list(){
     var category = $("#category_filter").val();
     var prio_filter = $("#prio_filter").val();
     var show_postponed = $('#show_postponed').prop("checked");
-    tags = []
+    tags = [];
     
     if($('#debug').prop("checked")) debug.begin("Issues"); //debug timer
     
@@ -87,18 +87,22 @@ function view_issue_list(){
         firstBy("prio")
         .thenBy("postpone") 
         .thenBy("update_date", -1));
-	
-	//tags 
+        
+    //tags     
 	open_items.forEach(function(item) {
 		catch_tags(item.notes, tags);
 	});
  	tags.sort(firstBy("count",-1));
  	
+ 	
+ 	
+ 	
+ 	
  	$("#tags").empty();
+ 	$("#tags").html("<button>notag ("+open_items.query("notes,title","exclude","#").length+")</button>");
  	tags.forEach(function(tag) {
 		$("#tags").append(Mustache.to_html($("#tags_template").html(), tag));
-	});
-
+	}); 	
  	
  	
 		

@@ -91,11 +91,7 @@ $(".finish-button").click(function() {
 $("#import-button").click(function() { 
     var items = JSON.parse($('#import').val());
     if (confirm('Add '+items.length+' items?')==true) {
-        //window.localStorage.setItem(itemList.storageKey, $('#import').val());
-       	console.log(JSON.parse($('#import').val()));
- 
        	itemList.import_json($('#import').val());     
-       	console.log(itemList.itemArray);  	
        	open_page("#issues");
     }
 });
