@@ -308,7 +308,7 @@ function fill_form(form_id, item){
 
 function catch_tags(str, list){
   while(str.indexOf("#")>=0){
-  var start = str.indexOf("#");
+  var start = str.indexOf("#")+1;
   var tag = "";
     str = str.substring(start);
   var end = str.indexOf(" ");

@@ -34,9 +34,8 @@ $("#issues .search").focus(function() {
 }); 
  
 $(document).on('click', ".tag-button", function() {
-    console.log("hej");
-    var tag = $(this).html();
-    $("#issues .search").val(tag.substring(0,tag.indexOf(" (")));
+    var tag = $(this).html().substring(0,$(this).html().indexOf(" ("));
+		$("#issues .search").val('#'+tag);
     open_page("#issues");
 }); 
  
@@ -110,7 +109,7 @@ $(".new-issue-button").click(function() {
 	$("#new .menu-title").html("New Project");
 	
 	
-	fill_form("#new-item-form", {title:"", type:"7",  icon:"", prio:"6", parent_id:"-"});	
+	fill_form("#new-item-form", {title:"", type:"7",  icon:"", prio:"6", parent_id:"-", postpone: " "});	
 	
 	$('#new-item-form select[name="category"]').val($("#category_filter").val()); 
 	if($("#category_filter").val() =="*") $('#new-item-form select[name="category"]').val("-"); 
@@ -124,7 +123,7 @@ $("#single_issue .new-task-button").click(function() {
 	$("#new-item-form .category_select").hide();
 	$("#new .menu-title").html("New Task for: "+current_item.title);
 	
-	fill_form("#new-item-form", {title:"", type:"6", parent_id: current_item.id,  icon:"", prio:"6", category: current_item.category});		
+	fill_form("#new-item-form", {title:"", type:"6", parent_id: current_item.id,  icon:"", prio:"6", category: current_item.category, postpone: ""});		
 	
 	open_page ("#new");
 	
@@ -134,7 +133,7 @@ $("#task_list .new-task-button").click(function() {
 	$("#new-item-form").children().show();
 	$("#new .menu-title").html("New Task: No project");
 	
- 	fill_form("#new-item-form", {title:"", type:"6", parent_id:"-", icon:"", prio:"6", category:"-"});		
+ 	fill_form("#new-item-form", {title:"", type:"6", parent_id:"-", icon:"", prio:"6", category:"-", postpone:""});		
 	open_page ("#new");
 	
 });
