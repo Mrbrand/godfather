@@ -194,6 +194,10 @@ $(document).on('click', ".task .subitem-left, .issue .subitem-left", function() 
 	id = $(this).parent().find(".item_id").text();
 	item = itemList.get_item(id);
 	
+	$("#edit .icons").hide();
+	if(item.type=="7") $("#edit .project-icons").show();
+	else $("#edit .task-icons").show();
+	
 	$("#edit .menu-title").html("Edit: "+item.title);
     fill_form("#edit-item-form", item);
     open_page ("#edit");
