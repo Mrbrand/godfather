@@ -15,8 +15,12 @@ $(".cancel-button").click(function() {
 }); 
 
 // x:et i sökrutan
-$('input[type=search]').on('search', function () {
+$('#issues input[type=search]').on('search', function () {
      open_page("#issues");
+});
+
+$('#task_list input[type=search]').on('search', function () {
+     open_page("#task_list");
 });
 
 $("#category_filter").change(function() { 
@@ -109,7 +113,7 @@ $(".new-issue-button").click(function() {
 	$("#new .menu-title").html("New Project");
 	
 	
-	fill_form("#new-item-form", {title:"", type:"7",  icon:"", prio:"6", parent_id:"-", postpone: " "});	
+	fill_form("#new-item-form", {title:"", type:"7",  icon:"", prio:"6", parent_id:"-", postpone: ""});	
 	
 	$('#new-item-form select[name="category"]').val($("#category_filter").val()); 
 	if($("#category_filter").val() =="*") $('#new-item-form select[name="category"]').val("-"); 
@@ -134,6 +138,7 @@ $("#task_list .new-task-button").click(function() {
 	$("#new .menu-title").html("New Task: No project");
 	
  	fill_form("#new-item-form", {title:"", type:"6", parent_id:"-", icon:"", prio:"6", category:"-", postpone:""});		
+	
 	open_page ("#new");
 	
 });
