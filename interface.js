@@ -55,7 +55,7 @@ function open_page (page_id, show_extra) {
 	if(page_id == "#task_list" || page_id == "#issues" )  $("body").scrollTop(scroll_positions[page_id]);
 	else window.scrollTo(0, 0);
 	
-	$(current_page + " [name='title'] ").focus();
+	
 }
 
 
