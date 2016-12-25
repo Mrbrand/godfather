@@ -80,7 +80,7 @@ label > input:checked + span{ /* (CHECKED) IMAGE STYLES */
 .item.postponed{ background:  -webkit-linear-gradient(#BBF, #88A);}
 .notes{color:#88A;}
 .next_action{color: #A96;}
- .parent{font-size:9px;color:#AA6;}
+ .parent{font-size:12px;color:#AA6; font-weight:bold;}
  
 .finished{background: -webkit-linear-gradient(#99A, #778);}
 .finished>.subitem-center>.title{color:#CCC;}
