@@ -43,7 +43,7 @@
 			<div class="header">
 				
 				<div style="float:left;">
-				<select id="category_filter" class="category_select"  style="background-color: rgba(255,255,255,.1); font-size:18pt; width:250px;">
+				<select id="category_filter" class="category_select category_filter"  onchange="$('.category_filter').val($(this).val());" style="background-color: rgba(255,255,255,.1); font-size:18pt; width:250px;">
 					<option value="*">-All-</option>
 					<option value="-">-No category-</option>
 					<option value="edit">Edit...</option>
@@ -77,9 +77,22 @@
 	<div id="task_list" class="page" style="display:none;">
 			  
 			<div class="header">
+				<div style="float:left;">
+				<select class="category_select category_filter" onchange="$('.category_filter').val($(this).val());" style="background-color: rgba(255,255,255,.1); font-size:18pt; width:250px;">
+					<option value="*">-All-</option>
+					<option value="-">-No category-</option>
+					<option value="edit">Edit...</option>
+				</select>
+				</div>
 				
-				
-				<div style="margin: 10px 0; float:left;">
+				<img class="issue-list-button" src="img/type7.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
+                <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+			</div> <!--end header-->
+			
+		<! Controls>
+			<div class="controls" style="height:40px; padding: 5px;">
+            <input class="search_task" type="search" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:50px; float:left; margin-left:5px;"/>
+				<div style="margin: 10px 10px; float:left;">
 		           <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
 					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
 					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
@@ -89,15 +102,7 @@
 					<label><input type="radio" name="icon" value="📆" /><span>📆</span></label>
 					<label><input type="radio" name="icon" value="" checked="checked" /><span>All</span></label>
         		</div>
-			
-			
-				<img class="issue-list-button" src="img/type7.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
-                <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
-			</div> <!--end header-->
-			
-		<! Controls>
-			<div class="controls" style="height:40px; padding: 5px;">
-                <input class="search_task" type="search" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:100px; float:left; margin-left:5px;"/>
+						
                 <button class="new-task-button" style="float:right;">New task</button>
             </div><!-- end controls-->
             

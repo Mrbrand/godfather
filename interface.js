@@ -94,10 +94,6 @@ function view_issue_list(){
 	});
  	tags.sort(firstBy("count",-1));
  	
- 	
- 	
- 	
- 	
  	$("#tags").empty();
  	$("#tags").html("<button>notag ("+open_items.query("notes,title","exclude","#").length+")</button>");
  	tags.forEach(function(tag) {
@@ -125,12 +121,18 @@ function view_issue_list(){
 function view_task_list(){ 	
     var query = $(".search_task").val().toLowerCase();
     var context = $('input[name="icon"]:checked').val();
-    //var sortby = $("#sortby").val();
+	var category = $("#category_filter").val();
+    var category = $("#category_filter").val();
+	//var sortby = $("#sortby").val();
 	
     var open_items=itemList.get_all()
     	.query("type", "==", 6)
 		.query("finish_date", "==", "")
 		.query("title, notes", "contains", query);
+
+  if (query=="" & category=="*") open_items = open_items.query("prio", "<" ,prio_filter);
+	console.log(category);	
+	if(category!="*") open_items=open_items.query("category", "==", category);
 
      if(context) open_items=open_items.query("icon", "==", context);
  	 if(query=="" & context=="") open_items = open_items.query("prio", "<" ,5);

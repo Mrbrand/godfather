@@ -23,9 +23,12 @@ $('#task_list input[type=search]').on('search', function () {
      open_page("#task_list");
 });
 
-$("#category_filter").change(function() { 
+$(".category_filter").change(function() { 
     if($(this).val()=="edit") open_page("#category_list");
-    else open_page("#issues");
+	else {
+		if (current_page == "#issues") open_page("#issues");
+		else  open_page("#task_list");
+	}
 }); 
  
  
