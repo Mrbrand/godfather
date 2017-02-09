@@ -139,7 +139,7 @@ $("#task_list .new-task-button").click(function() {
 	$("#new-item-form").children().show();
 	$("#new .menu-title").html("New Task: No project");
 	
- 	fill_form("#new-item-form", {title:"", type:"6", parent_id:"-", icon:"", prio:"6", category:"-", postpone:""});		
+ 	fill_form("#new-item-form", {title:"", type:"6", parent_id:"-", icon:"", prio:"1", category:"-", postpone:""});		
 	
 	open_page ("#new");
 	$(current_page + " [name='title'] ").focus();
