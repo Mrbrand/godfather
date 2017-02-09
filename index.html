@@ -78,7 +78,8 @@
 			  
 			<div class="header">
 				<div style="float:left;">
-				<select class="category_select category_filter" onchange="$('.category_filter').val($(this).val());" style="background-color: rgba(255,255,255,.1); font-size:18pt; width:250px;">
+				 <input class="search_task" type="search" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:70px; float:left; margin-left:5px;"/>
+				<select class="category_select category_filter" onchange="$('.category_filter').val($(this).val());" style="background-color: rgba(255,255,255,.1); font-size:18pt; width:180px; float:left;">
 					<option value="*">-All-</option>
 					<option value="-">-No category-</option>
 					<option value="edit">Edit...</option>
@@ -91,7 +92,7 @@
 			
 		<! Controls>
 			<div class="controls" style="height:40px; padding: 5px;">
-            <input class="search_task" type="search" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:50px; float:left; margin-left:5px;"/>
+           
 				<div style="margin: 10px 10px; float:left;">
 		           <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
 					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>

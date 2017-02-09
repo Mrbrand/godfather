@@ -58,7 +58,7 @@ label > input:checked + span{ /* (CHECKED) IMAGE STYLES */
 }
 
 .controls label > input + span{ /* IMAGE STYLES */
-  padding:0px;
+  padding:1px;
 }
 
 /****** ITEMLIST **************************************************************/
