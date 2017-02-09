@@ -113,7 +113,7 @@ $(".new-issue-button").click(function() {
 	$("#new .menu-title").html("New Project");
 	
 	
-	fill_form("#new-item-form", {title:"", type:"7",  icon:"", prio:"6", parent_id:"-", postpone: ""});	
+	fill_form("#new-item-form", {title:"", type:"7",  icon:"", prio:"1", parent_id:"-", postpone: ""});	
 	
 	$('#new-item-form select[name="category"]').val($("#category_filter").val()); 
 	if($("#category_filter").val() =="*") $('#new-item-form select[name="category"]').val("-"); 
@@ -128,7 +128,7 @@ $("#single_issue .new-task-button").click(function() {
 	$("#new-item-form .category_select").hide();
 	$("#new .menu-title").html("New Task for: "+current_item.title);
 	
-	fill_form("#new-item-form", {title:"", type:"6", parent_id: current_item.id,  icon:"", prio:"6", category: current_item.category, postpone: ""});		
+	fill_form("#new-item-form", {title:"", type:"6", parent_id: current_item.id,  icon:"", prio:"1", category: current_item.category, postpone: ""});		
 	
 	open_page ("#new");
 	$(current_page + " [name='title'] ").focus();
