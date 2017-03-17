@@ -139,8 +139,10 @@ function view_task_list(){
     //sortera fltered items
     open_items.sort(
         firstBy("prio")
-        .thenBy("postpone") 
-        .thenBy("update_date", -1)
+        .thenBy("postpone")
+		  .thenBy(function (v1, v2) { return v1.time - v2.time; })
+   // 
+   //     .thenBy("update_date", -1)
 	);
 
 	mustache_output("#tasks", open_items, "#filtered_task_template", "prio");

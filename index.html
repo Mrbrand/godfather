@@ -237,6 +237,10 @@
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#postpone').val(moment().add(1, 'days').format('YYYY-MM-DD ddd'));">Tomorrow</button>	
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd')); $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'days')).format('YYYY-MM-DD ddd'));">+1 day</button>	
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd'));  $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'week')).format('YYYY-MM-DD ddd'));">+1 week</button>
+	
+             <! TIME>       
+			<input name="time" type="text" class="autovalue"  style="width:60px;" placeholder="Minutes"/>
+
              <! NOTES>       
 				<textarea name="notes" class="autovalue" placeholder="Notes" rows="10"></textarea>
 				
@@ -330,7 +334,8 @@
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#edit #postpone').val()=='') $('#edit #postpone').val(moment().format('YYYY-MM-DD ddd')); $('#edit #postpone').val((moment($('#edit #postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'days')).format('YYYY-MM-DD ddd'));">+1 day</button>	
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#edit #postpone').val()=='') $('#edit #postpone').val(moment().format('YYYY-MM-DD ddd'));  $('#edit #postpone').val((moment($('#edit #postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'week')).format('YYYY-MM-DD ddd'));">+1 week</button>
 
-
+   <! TIME>       
+			<input name="time" type="text" class="autovalue"  style="width:60px;" placeholder="Minutes"/>
 <!--
 				<input class="autovalue" type="search" name="postpone" placeholder="Postpone to..." />
 				
@@ -546,6 +551,7 @@
     		{{#icon}}<div style="font-size: 22px; margin:10px 7px 0 7px; ">{{icon}}</div>{{/icon}}
 			{{^icon}}<img class="type-icon" style="margin:10px 7px 0 7px; height:32px;" src="img/type{{type}}.png"/>{{/icon}}
             <img class="prio-icon" src="img/prio{{prio}}.png"/>
+			{{#time}}<span style="color:#AAA; background: #444;padding:1px; border-radius: 3px; margin-left:5px; font-size:10px;">{{time}}</span>{{/time}}
 		</div>
         
 		<div class="subitem-center">
@@ -583,6 +589,8 @@
 			{{^icon}}<img class="type-icon" style="margin:10px 7px 0 7px; height:32px;" src="img/type{{type}}.png"/>{{/icon}}
             <img class="prio-icon" src="img/prio{{prio}}.png"/>
             <!--span style="color:#888;">{{order}}</span-->
+			{{#time}}<span style="color:#AAA; background: #444;padding:1px; border-radius: 3px; margin-left:5px; font-size:10px;">{{time}}</span>{{/time}}
+				
 		</div>
 		
         
@@ -646,6 +654,7 @@
 			{{^icon}}<img class="type-icon" style="margin:10px 7px 0 7px; height:32px;" src="img/type{{type}}.png"/>{{/icon}}
             <img class="prio-icon" src="img/prio{{prio}}.png"/>
             <!--span style="color:#888;">{{order}}</span-->
+			{{#time}}<span style="color:#AAA; background: #444;padding:1px; border-radius: 3px; margin-left:5px; font-size:10px;">{{time}}</span>{{/time}}
 		</div>
 		
 		<div class="subitem-center">
