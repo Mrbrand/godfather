@@ -51,7 +51,7 @@
 				</div>
 			
 				<img class="task-list-button" src="img/type6.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
-                <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+            <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 		<! Controls>
@@ -86,8 +86,8 @@
 				</select>
 				</div>
 				
-				<img class="issue-list-button" src="img/type7.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
-                <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+				<!img class="issue-list-button" src="img/type7.png"  style="float:right; margin:5px; cursor:pointer; width:32px;"/>
+            <img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
 			</div> <!--end header-->
 			
 		<! Controls>
@@ -129,8 +129,9 @@
 	<!--Sub-meny-->
 	<div class="controls">
 		<!--button class="home-button"><img src="img/home16.png"</button-->
-		<button onclick="open_page('#issues');" style="float:left;">Back</button>
-        <button class="new-task-button" style="float:right;">New task</button>
+		<button onclick="open_page('#task_list');" style="float:left;">Back</button>
+		<button class="up-button" style="float:left; margin-left:5px;">Up</button>
+       <button class="new-task-button" style="float:right;">New</button>
         
         <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
         <! input id="search-item" onkeyup="view_item(current.id);" style="float:right; margin-right:10px;width:150px;" placeholder="Filter"/>
@@ -160,7 +161,7 @@
 	
 	<!--Sub-meny-->
 	<div class="controls">
-		<button onclick="set_categories(); open_page('#issues');">Back</button>
+		<button onclick="set_categories(); open_page('#task_list');">Back</button>
         <button class="new-category-button" style="float:right;">New category</button>
 	</div><!-- end controls-->
 	
@@ -204,7 +205,7 @@
         			<input name="icon" class="autovalue" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
            		</div-->
            		
-           		<div class="context" style="margin: 10px 0;">
+           	<div class="context" style="margin: 10px 0;">
 		           <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
 					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
 					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
@@ -291,7 +292,7 @@
 							<label><input type="radio" name="icon" value="" /><span>none</span></label>
         	</div>
 
-					<div class="project-icons icons" style="margin: 10px 0;">
+					<!--div class="project-icons icons" style="margin: 10px 0;">
 		           <label><input type="radio" name="icon" value="🐰" /><span>🐰</span></label>
 							<label><input type="radio" name="icon" value="🏁" /><span>🏁</span></label>
 							<label><input type="radio" name="icon" value="💡" /><span>💡</span></label>
@@ -300,7 +301,7 @@
 							<label><input type="radio" name="icon" value="😱" /><span>😱</span></label>
 							<label><input type="radio" name="icon" value="🐣" /><span>🐣</span></label>
 							<label><input type="radio" name="icon" value="" /><span>none</span></label>
-        	</div>
+        	</div-->
         		<!--div style="display:inline;">
         			<input class="autovalue" name="icon" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
            		</div-->
@@ -480,7 +481,7 @@
 			
 			<!--Sub-meny-->
 			<div class="controls">
-				<button onclick="open_page('#issues');">Back</button>
+				<button onclick="open_page('#task_list');">Back</button>
 			</div><!-- end controls-->
             
             <input id="debug" type="checkbox" style="width:25px; float:left; margin-left:5px;">
@@ -717,6 +718,6 @@
     <script language="JavaScript" type="text/javascript" src="array_query.js"></script>
     <script language="JavaScript" type="text/javascript" src="javascript/debug_timer.js"></script>
     <script language="JavaScript" type="text/javascript" src="carbon.js"></script>
-    <script language="JavaScript" type="text/javascript" src="interface.js"></script>
+    <script language="JavaScript" type="text/javascript" src="functions.js"></script>
 	<script language="JavaScript" type="text/javascript" src="controller.js"></script>
 

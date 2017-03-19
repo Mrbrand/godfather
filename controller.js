@@ -10,6 +10,14 @@ $(".back-button").click(function() {
 	 open_page(previous_page);
 });
 
+$(".up-button").click(function() { 	 
+	if(current_item.parent_id){	
+		current_item = itemList.get_item(current_item.parent_id);
+		open_page("#single_issue");
+	}
+});
+
+
 $(".cancel-button").click(function() { 
     open_page(previous_page);
 }); 
@@ -142,7 +150,7 @@ $("#task_list .new-task-button").click(function() {
 	$("#new-item-form").children().show();
 	$("#new .menu-title").html("New Task: No project");
 	
- 	fill_form("#new-item-form", {title:"", type:"6", parent_id:"-", icon:"", prio:"1", category:"-", postpone:""});		
+ 	fill_form("#new-item-form", {title:"", type:"6", parent_id:"", icon:"", prio:"1", category:"-", postpone:""});		
 	
 	open_page ("#new");
 	$(current_page + " [name='title'] ").focus();
@@ -198,15 +206,24 @@ $(".issue-list-button").click(function() {
 });
 
 
+// GOTO NEW CHILD
+$(document).on('click', ".subitem-right", function() {
+	id = $(this).parent().find(".item_id").text();
+	item = itemList.get_item(id);
+	
+	fill_form("#new-item-form", {title:"", type:"6", parent_id: item.id,  icon:"", prio:"1", category: item.category, postpone: ""});	
+
+	$("#new .menu-title").html("New Task for: "+item.title);
+    open_page ("#new");
+});
+
+
+
 
 // GOTO EDIT  
 $(document).on('click', ".task .subitem-left, .issue .subitem-left", function() {
 	id = $(this).parent().find(".item_id").text();
 	item = itemList.get_item(id);
-	
-	$("#edit .icons").hide();
-	if(item.type=="7") $("#edit .project-icons").show();
-	else $("#edit .task-icons").show();
 	
 	$("#edit .menu-title").html("Edit: "+item.title);
     fill_form("#edit-item-form", item);
@@ -225,25 +242,24 @@ $(document).on('click', ".category .subitem-left", function() {
 });
 
 // GOTO SINGLE ISSUE
-$(document).on('click', ".issue .subitem-center", function() {
+$(document).on('click', "#single_issue .subitem-center", function() {
 	id = $(this).parent().find(".item_id").text();
 	current_item = itemList.get_item(id);
-
-	$("#single_issue .menu-title").text(current_item.title);
 
 	open_page("#single_issue");
 	//view_single_issue(id);
 });
 
 
-// GOTO SINGLE ISSUE
+// GOTO SINGLE ISSUE PARENT
 $(document).on('click', "#task_list .subitem-center", function() {
-	id = $(this).parent().find(".item_id").text();
-	current_item = itemList.get_item(itemList.get_item(id).parent_id);
+	id = $(this).parent().find(".item_id").text();	
 
-	$("#single_issue .menu-title").text(current_item.title);
-	
-	open_page("#single_issue");
+	if (itemList.get_item(id).parent_id) {//om item har parent
+		current_item = itemList.get_item(itemList.get_item(id).parent_id);
+		open_page("#single_issue");
+	}
+
 	//view_single_issue(id);
 });
 
