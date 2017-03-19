@@ -143,14 +143,14 @@ open_items =open_items
   	if (query=="" & category=="*") 	open_items = open_items.query("prio", "<" ,prio_filter); 
 	
 	// filtrera bort projekt som redan har subtask
-	if (query=="") 	open_items = open_items..query("open_task_count", "==", 0);	
+	if (query=="") 	open_items = open_items.query("open_task_count", "==", 0);	
 	
 	// filtrera på kategori om kategori är vald	
 	if(category!="*") open_items=open_items.query("category", "==", category);
 
 	// filtrera på ikon om ikon är vald	
    if(icon) open_items=open_items.query("icon", "==", icon);
- 	if(query=="" & context=="") open_items = open_items.query("prio", "<" ,5);
+ 	if(query=="" & icon=="") open_items = open_items.query("prio", "<" ,5);
    
 	//sortera items
    open_items.sort(
