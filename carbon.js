@@ -118,6 +118,18 @@ Carbon.prototype.edit_from_form = function(form_id) {
     else return false;
 };
 
+Carbon.prototype.get_quicklist = function() {
+ 	var quicklist = [];
+	var open_items = this.get_all().query("finish_date","==","");
+	open_items.forEach(function(item) {
+		quicklist.push(item.title+" #"+item.id);
+	}); 
+ 	return quicklist;
+};
+
+
+
+
 
 Carbon.prototype.set_item_field = function(id, field, value) {
     for(var i in this.itemArray){

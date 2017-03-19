@@ -31,6 +31,10 @@ Sortable.create(document.getElementById('categories'), {handle: '.subitem-right'
 set_categories();
 open_page("#task_list");
 
+//awesomlete
+var input_parent = document.getElementById("parent");
+var awesomplete = new Awesomplete(input_parent);
+awesomplete.list = itemList.get_quicklist();
 
 
 /* PageHandler class *******************************************************/
@@ -61,61 +65,7 @@ function open_page (page_id, show_extra) {
 
 
 /* FUNCTIONS *******************************************************************/
-/*
-function view_issue_list(){ 	
-    var query = $(".search").val().toLowerCase();
-    var category = $("#category_filter").val();
-    var prio_filter = $("#prio_filter").val();
-    var show_postponed = $('#show_postponed').prop("checked");
-    tags = [];
-    
-    if($('#debug').prop("checked")) debug.begin("Issues"); //debug timer
-    
-    var open_items=itemList.get_all()
-   		.query("type", "==", 7)
-		.query("finish_date", "==", "")
-    	.query("title, notes", "contains", query);
-    	
-    if (query=="" & category=="*") open_items = open_items.query("prio", "<" ,prio_filter);
-      	
-      
-    if(category!="*") open_items=open_items.query("category", "==", category);
-    if(!show_postponed) open_items=open_items.query("postpone", "==", "");
-    
-    if($('#debug').prop("checked")) debug.comment("filter klar"); //debug timer
-    
-    open_items.sort(
-        firstBy("prio")
-        .thenBy("postpone") 
-        .thenBy("update_date", -1));
-        
-    //tags     
-	open_items.forEach(function(item) {
-		catch_tags(item.notes, tags);
-	});
- 	tags.sort(firstBy("count",-1));
- 	
- 	$("#tags").empty();
- 	$("#tags").html("<button>notag ("+open_items.query("notes,title","exclude","#").length+")</button>");
- 	tags.forEach(function(tag) {
-		$("#tags").append(Mustache.to_html($("#tags_template").html(), tag));
-	}); 	
- 	
- 	
-		
-	if($('#debug').prop("checked")) debug.comment("sortering klar"); //debug timer
-	
-	mustache_output("#filtered", open_items, "#issue_template", "prio");
-	
-	if($('#debug').prop("checked")) debug.comment("output klar"); //debug timer
-	
-  	//om inga items hittas
-	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
 
-	if($('#debug').prop("checked")) debug.stop();
-
-}
-*/
 
 
 function view_task_list(){ 	
@@ -127,7 +77,7 @@ function view_task_list(){
    var open_items=itemList.get_all();
 	var open_items_with_meta = [];
 	
-	//lägga till metadata så som parent_title, subitem_count, etc 
+	//lägga till metadata så som parent_tree, subitem_count, etc 
 	open_items.forEach(function(item) {
 		open_items_with_meta.push(item_with_meta(item.id));
 	});
@@ -137,7 +87,7 @@ function view_task_list(){
 open_items =open_items
 		.query("type", "!=", 13) //inte kategorier
 		.query("finish_date", "==", "")
-		.query("title, notes", "contains", query)
+		.query("title, notes, parent_tree", "contains", query)
 
 	// filtrera bort lågprioriterade (snabbhet)
   	if (query=="" & category=="*") 	open_items = open_items.query("prio", "<" ,prio_filter); 
@@ -242,7 +192,7 @@ function reorder(items, from_pos, to_pos){
         item.order = index + offset;
         if(index == from_pos) item.order = to_pos;
     }
-    console.log(items);
+    //console.log(items);
     itemList.save(); 
 }
 
@@ -265,7 +215,7 @@ function set_categories(){
 
 
 function mustache_output(output_id, items, template_id, group_by){
-    console.log(items);
+    //console.log(items);
 	var new_group = "";
     var html="";
  	
@@ -305,9 +255,9 @@ function item_with_meta(id){
 	
 	
 	var parent= itemList.get_item(item.parent_id);
- 	item.parent_title ="";
+ 	item.parent_tree ="";
 	while(parent){	
-		item.parent_title = "/"+ parent.title + item.parent_title;
+		item.parent_tree = "/"+ parent.title + item.parent_tree;
 		parent= itemList.get_item(parent.parent_id);
 	}
 	return item;

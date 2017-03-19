@@ -118,7 +118,7 @@ $(".more-button").click(function() {
  
  
  
-$(".new-issue-button").click(function() {
+/*$(".new-issue-button").click(function() {
 	$("#new-item-form").children().show();
 	$("#new-item-form .context").hide();
 	$("#new .menu-title").html("New Project");
@@ -131,9 +131,9 @@ $(".new-issue-button").click(function() {
 	
 	open_page ("#new");
 	$(current_page + " [name='title'] ").focus();
-});
+});*/
 
-
+// NEW TASK BUTTON ITEM_VIEW
 $("#single_issue .new-task-button").click(function() { 
 	$("#new-item-form").children().show();
 	$("#new-item-form .category_select").hide();
@@ -146,6 +146,21 @@ $("#single_issue .new-task-button").click(function() {
 	
 });
 
+
+// NEW CHILD
+$(document).on('click', ".subitem-right", function() {
+	id = $(this).parent().find(".item_id").text();
+	item = itemList.get_item(id);
+	
+	fill_form("#new-item-form", {title:"", type:"6", parent_id: item.id,  icon:"", prio:"1", category: item.category, postpone: ""});	
+
+	$("#new .menu-title").html("New Task for: "+item.title);
+    open_page ("#new");
+	$(current_page + " [name='title'] ").focus();
+
+});
+
+// NEW TASK BUTTON TASK_LIST
 $("#task_list .new-task-button").click(function() { 
 	$("#new-item-form").children().show();
 	$("#new .menu-title").html("New Task: No project");
@@ -206,19 +221,6 @@ $(".issue-list-button").click(function() {
 });
 
 
-// GOTO NEW CHILD
-$(document).on('click', ".subitem-right", function() {
-	id = $(this).parent().find(".item_id").text();
-	item = itemList.get_item(id);
-	
-	fill_form("#new-item-form", {title:"", type:"6", parent_id: item.id,  icon:"", prio:"1", category: item.category, postpone: ""});	
-
-	$("#new .menu-title").html("New Task for: "+item.title);
-    open_page ("#new");
-});
-
-
-
 
 // GOTO EDIT  
 $(document).on('click', ".task .subitem-left, .issue .subitem-left", function() {
@@ -262,5 +264,14 @@ $(document).on('click', "#task_list .subitem-center", function() {
 
 	//view_single_issue(id);
 });
+
+window.addEventListener("awesomplete-selectcomplete", function(e){
+    
+	str = $("#parent").val()
+	pos = str.indexOf("#");
+	id = parseInt(str.substr(pos+1));
+	$('#edit-item-form input[name="parent_id"]').val(id); 
+	//$(".item-parent-id").val(id);
+}, false);
 
 

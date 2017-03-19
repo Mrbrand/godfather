@@ -25,8 +25,11 @@
 		<script language="JavaScript" type="text/javascript" src="javascript/jquery.detect_swipe.js"></script> 
 		<!--script language="JavaScript" type="text/javascript" src="javascript/tinysort.js"></script-->
          <!--dropdown select inputs-->
-        <script src="javascript/jquery.dd.min.js" type="text/javascript"></script>
-        <link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css" />
+        <!--script src="javascript/jquery.dd.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css" /-->
+
+			<link rel="stylesheet" href="awesomplete/awesomplete.css" />
+        <script src="awesomplete/awesomplete.js"></script>
         
         <script src="javascript/sortable.js"></script>
 		
@@ -331,14 +334,6 @@
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#edit #postpone').val()=='') $('#edit #postpone').val(moment().format('YYYY-MM-DD ddd')); $('#edit #postpone').val((moment($('#edit #postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'days')).format('YYYY-MM-DD ddd'));">+1 day</button>	
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#edit #postpone').val()=='') $('#edit #postpone').val(moment().format('YYYY-MM-DD ddd'));  $('#edit #postpone').val((moment($('#edit #postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'week')).format('YYYY-MM-DD ddd'));">+1 week</button>
 
-
-<!--
-				<input class="autovalue" type="search" name="postpone" placeholder="Postpone to..." />
-				
-				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#postpone').val(moment().add(1, 'days').format('YYYY-MM-DD ddd'));">Tomorrow</button>	
-				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd')); $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'days')).format('YYYY-MM-DD ddd'));">+1 day</button>	
-				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd'));  $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'week')).format('YYYY-MM-DD ddd'));">+1 week</button>
-				-->
 									
 			<! NOTES >
 				<textarea class="autovalue" name="notes" rows="8" placeholder="Notes"></textarea>
@@ -360,7 +355,8 @@
                     
                     	<! PARENT >
                     <span class="field-description">Parent item in tree</span>
-        				<input class="autovalue" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+        				<!input class="autovalue" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+                    <input id="parent" class="autovalue"  type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
                     
                     <! RESPAWN >
                     <span class="field-description">Make item respawn after finish</span>
@@ -656,7 +652,7 @@
 
 		<div class="subitem-center">
 			<div class="title" style="">{{title}}</div>
-			<div class="parent" style="">{{parent_title}}</div>
+			<div class="parent" style="">{{parent_tree}}</div>
 			<div class="next_action_div" style="float:left;">
 				{{#postpone}}<span class="postpone">{{postpone}}</span>{{/postpone}}
 				{{#notes}}<div class="notes">{{notes}}</div>{{/notes}}
