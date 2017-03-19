@@ -120,14 +120,14 @@ function view_issue_list(){
 
 function view_task_list(){ 	
    var query = $(".search_task").val().toLowerCase();
-   var context = $('input[name="icon"]:checked').val();
+   var icon = $('input[name="icon"]:checked').val();
 	var category = $("#category_filter").val();
 	//var sortby = $("#sortby").val();
 
    var open_items=itemList.get_all();
 	var open_items_with_meta = [];
 	
-	//lägga till metadata så som parent_title, has_children, etc 
+	//lägga till metadata så som parent_title, subitem_count, etc 
 	open_items.forEach(function(item) {
 		open_items_with_meta.push(item_with_meta(item.id));
 	});
@@ -138,22 +138,21 @@ open_items =open_items
 		.query("type", "!=", 13) //inte kategorier
 		.query("finish_date", "==", "")
 		.query("title, notes", "contains", query)
+
+	// filtrera bort lågprioriterade (snabbhet)
+  	if (query=="" & category=="*") 	open_items = open_items.query("prio", "<" ,prio_filter); 
 	
-
-
-//console.log(open_items);
-
-  	if (query=="" & category=="*") {
-		open_items = open_items
-			.query("prio", "<" ,prio_filter)
-			.query("open_task_count", "==", 0);	
-	}
-
+	// filtrera bort projekt som redan har subtask
+	if (query=="") 	open_items = open_items..query("open_task_count", "==", 0);	
+	
+	// filtrera på kategori om kategori är vald	
 	if(category!="*") open_items=open_items.query("category", "==", category);
 
-   if(context) open_items=open_items.query("icon", "==", context);
+	// filtrera på ikon om ikon är vald	
+   if(icon) open_items=open_items.query("icon", "==", icon);
  	if(query=="" & context=="") open_items = open_items.query("prio", "<" ,5);
-    //sortera fltered items
+   
+	//sortera items
    open_items.sort(
         firstBy("prio")
         .thenBy("postpone") 
@@ -164,7 +163,6 @@ open_items =open_items
 
   	//om inga items hittas
 	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");
-
 }
 
 
@@ -305,10 +303,13 @@ function item_with_meta(id){
 
 	item.finished_task_count = finished_tasks.length;
 	
-	var parent= itemList.get_item(item.parent_id);
-	if (parent) item.parent_title = parent.title
-	else item.parent_title = "";
 	
+	var parent= itemList.get_item(item.parent_id);
+ 	item.parent_title ="";
+	while(parent){	
+		item.parent_title = "/"+ parent.title + item.parent_title;
+		parent= itemList.get_item(parent.parent_id);
+	}
 	return item;
 }
 
