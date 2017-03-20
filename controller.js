@@ -1,8 +1,9 @@
 /* KNAPPAR   *******************************************************************/
 
 $(".add-button").click(function() {
-    itemList.add_from_form(current_page+" form");
-     open_page(previous_page);
+   itemList.add_from_form(current_page+" form");
+	awesomplete.list = itemList.get_quicklist();
+   open_page(previous_page);
 });
 
 
@@ -58,6 +59,7 @@ $(".delete-button").click(function() {
 	id = $(current_page+" form .item-id").val();
     if (confirm('Delete "'+itemList.get_item(id).title+'"?')==true) {
 		itemList.remove_item(id);
+		awesomplete.list = itemList.get_quicklist();
 		open_page(previous_page);
     }
 });
@@ -175,6 +177,7 @@ $("#task_list .new-task-button").click(function() {
 
 $(".new-category-button").click(function() { 
     fill_form("#new-category-form", {title:"", type:"13", icon:""});	
+	
 	open_page ("#new-category");
 	
 });
@@ -190,8 +193,9 @@ $("#task_list input[name='icon']").click(function() {
 
 
 $(".save-button").click(function() {
-    itemList.edit_from_form(current_page+" form");
-     open_page(previous_page);
+   itemList.edit_from_form(current_page+" form");
+	awesomplete.list = itemList.get_quicklist();
+   open_page(previous_page);
 });
 
 /*$("#show_postponed").change(function() { 

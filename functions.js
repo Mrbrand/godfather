@@ -120,7 +120,17 @@ open_items =open_items
 function view_single_issue (id) {
 	$("#single_issue .menu-title").text(current_item.title);    
 
-	var open_items = itemList.get_all()
+	
+
+	var open_items = itemList.get_all();
+	var open_items_with_meta = [];
+	
+	open_items.forEach(function(item) {
+		open_items_with_meta.push(item_with_meta(item.id));
+	});
+	open_items = open_items_with_meta;
+
+	open_items =open_items
     	.query("finish_date","==","")
     	.query("parent_id", "==", id)
     	.sort(firstBy("order")
@@ -131,7 +141,10 @@ function view_single_issue (id) {
     	.query("parent_id", "==", id)
     	.sort(firstBy("finish_date",-1));
 
-	mustache_output("#open", open_items, "#open_task_template");
+	console.log(open_items);
+
+	mustache_output("#open", open_items, "#open_task_template"); //! !!!!!!
+	
    mustache_output("#finished", finished_items, "#finished_task_template");
     
     // om listan är tom
