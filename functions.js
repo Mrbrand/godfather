@@ -250,16 +250,19 @@ function item_with_meta(id){
 	finished_tasks.sort(firstBy("finish_date"));
 	item.subitems = open_tasks[0];
 	item.open_task_count = open_tasks.length;
-
 	item.finished_task_count = finished_tasks.length;
 	
-	
+
+
+	//parent_tree
 	var parent= itemList.get_item(item.parent_id);
  	item.parent_tree ="";
+	//item.category_icon = 	itemList.get_item(item.category).icon;
 	while(parent){	
 		item.parent_tree = "/"+ parent.title + item.parent_tree;
 		parent= itemList.get_item(parent.parent_id);
 	}
+
 	return item;
 }
 
