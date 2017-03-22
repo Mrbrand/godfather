@@ -23,36 +23,24 @@ $(".cancel-button").click(function() {
     open_page(previous_page);
 }); 
 
-// x:et i sökrutan
-$('#issues input[type=search]').on('search', function () {
-     open_page("#issues");
-});
 
 $('#task_list input[type=search]').on('search', function () {
      open_page("#task_list");
 });
 
-$(".category_filter").change(function() { 
-    if($(this).val()=="edit") open_page("#category_list");
-	else {
-		if (current_page == "#issues") open_page("#issues");
-		else  open_page("#task_list");
-	}
+$("#category_filter").change(function() { 
+	if($(this).val()=="edit") open_page("#category_list");
+	else open_page("#task_list");
+}); 
+
+$("#type_filter").change(function() { 
+	 open_page("#task_list");
 }); 
  
  
-$("#issues .search").focus(function() { 
-    $("#controls-tags").show();
-}); 
- 
- $("#issues .search").blur(function() { 
-    $("#controls-tags").fadeOut(200);
-}); 
- 
-$(document).on('click', ".tag-button", function() {
-    var tag = $(this).html().substring(0,$(this).html().indexOf(" ("));
-		$("#issues .search").val('#'+tag);
-    open_page("#issues");
+$("#search").focus(function() { 
+    $("#extra-controls").show();
+console.log("hej");
 }); 
  
 $(".delete-button").click(function() {
@@ -149,7 +137,7 @@ $("#single_issue .new-task-button").click(function() {
 });
 
 
-// NEW CHILD
+// NEW CHILD 
 $(document).on('click', ".subitem-right", function() {
 	id = $(this).parent().find(".item_id").text();
 	item = itemList.get_item(id);
@@ -162,7 +150,7 @@ $(document).on('click', ".subitem-right", function() {
 
 });
 
-// NEW TASK BUTTON TASK_LIST
+// NEW TASK BUTTON TASK_LIST (filter view)
 $("#task_list .new-task-button").click(function() { 
 	$("#new-item-form").children().show();
 	$("#new .menu-title").html("New Task: No project");
@@ -248,7 +236,7 @@ $(document).on('click', ".category .subitem-left", function() {
 });
 
 // GOTO SINGLE ISSUE
-$(document).on('click', "#single_issue .subitem-center", function() {
+$(document).on('click', "#task_list .subitem-center, #single_issue .subitem-center", function() {
 	id = $(this).parent().find(".item_id").text();
 	current_item = itemList.get_item(id);
 
@@ -257,7 +245,7 @@ $(document).on('click', "#single_issue .subitem-center", function() {
 });
 
 
-// GOTO SINGLE ISSUE PARENT
+/*// GOTO SINGLE ISSUE PARENT
 $(document).on('click', "#task_list .subitem-center", function() {
 	id = $(this).parent().find(".item_id").text();	
 
@@ -268,9 +256,9 @@ $(document).on('click', "#task_list .subitem-center", function() {
 
 	//view_single_issue(id);
 });
+*/
 
 window.addEventListener("awesomplete-selectcomplete", function(e){
-    
 	str = $("#parent").val()
 	pos = str.indexOf("#");
 	id = parseInt(str.substr(pos+1));

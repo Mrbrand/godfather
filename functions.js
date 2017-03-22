@@ -69,9 +69,11 @@ function open_page (page_id, show_extra) {
 
 
 function view_task_list(){ 	
-   var query = $(".search_task").val().toLowerCase();
+   var query = $("#search").val().toLowerCase();
    var icon = $('input[name="icon"]:checked').val();
 	var category = $("#category_filter").val();
+	var type = $("#type_filter").val();
+
 	//var sortby = $("#sortby").val();
 
    var open_items=itemList.get_all();
@@ -87,16 +89,19 @@ function view_task_list(){
 open_items =open_items
 		.query("type", "!=", 13) //inte kategorier
 		.query("finish_date", "==", "")
-		.query("title, notes, parent_tree", "contains", query)
+		.query("title, notes, parent_tree", "contains", query);
 
 	// filtrera bort lågprioriterade (snabbhet)
   	if (query=="" & category=="*") 	open_items = open_items.query("prio", "<" ,prio_filter); 
 	
 	// filtrera bort projekt som redan har subtask
-	if (query=="") 	open_items = open_items.query("open_task_count", "==", 0);	
+	if (query=="" & type=="*") 	open_items = open_items.query("open_task_count", "==", 0);	
 	
 	// filtrera på kategori om kategori är vald	
 	if(category!="*") open_items=open_items.query("category", "==", category);
+
+	// filtrera på kategori om kategori är vald	
+	if(type!="*") open_items=open_items.query("type", "==", type);
 
 	// filtrera på ikon om ikon är vald	
    if(icon) open_items=open_items.query("icon", "==", icon);
@@ -264,14 +269,14 @@ function item_with_meta(id){
 	item.subitems = open_tasks[0];
 	item.open_task_count = open_tasks.length;
 	item.finished_task_count = finished_tasks.length;
-	
-
 
 	//parent_tree
 	var parent= itemList.get_item(item.parent_id);
  	item.parent_tree ="";
 	//item.category_icon = 	itemList.get_item(item.category).icon;
-	while(parent){	
+	
+	var counter = 10;
+	while(parent && (counter-- >0)){	
 		item.parent_tree = "/"+ parent.title + item.parent_tree;
 		parent= itemList.get_item(parent.parent_id);
 	}

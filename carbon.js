@@ -87,9 +87,10 @@ Carbon.prototype.copy = function(id) {
 // add from form
 Carbon.prototype.add_from_form = function(form_id) {
 	//skapa objekt av formdata
-    var form_object = $( form_id ).serializeObject();
+   var form_object = $( form_id ).serializeObject();
 	this.add_item(form_object);
-    console.log("add_from_form");
+	console.log(form_object);
+   //console.log("add_from_form");
 };
 	
     
