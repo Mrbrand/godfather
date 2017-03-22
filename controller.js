@@ -40,7 +40,6 @@ $("#type_filter").change(function() {
  
 $("#search").focus(function() { 
     $("#extra-controls").show();
-console.log("hej");
 }); 
  
 $(".delete-button").click(function() {
@@ -96,9 +95,18 @@ $("#import-button").click(function() {
     var items = JSON.parse($('#import').val());
     if (confirm('Add '+items.length+' items?')==true) {
        	itemList.import_json($('#import').val());     
-       	open_page("#issues");
+       	open_page("#task_list");
     }
 });
+
+
+$("#prio-decrease-button").click(function() { 
+    if (confirm('Decrease prio one step?')==true){
+ 			prio_decrease();
+			alert("Prio was decreased!");
+    }
+});
+ 
  
 
 $(".more-button").click(function() {	
@@ -133,7 +141,10 @@ $("#single_issue .new-task-button").click(function() {
 	
 	open_page ("#new");
 	$(current_page + " [name='title'] ").focus();
-	
+});
+
+$("#task_list .new-button").click(function() { 
+	$("#new-controls").toggle();
 });
 
 

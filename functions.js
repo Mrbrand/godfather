@@ -284,6 +284,28 @@ function item_with_meta(id){
 	return item;
 }
 
+function reset_prio(){
+ 	var items = itemList.get_all().query("type","!=","13");
+	console.log(items);	
+	items.forEach(function(item) {
+		itemList.set_item_field(item.id, "prio", 1+"");
+	});
+	view_task_list();
+}
+
+
+function prio_decrease(){
+ 	var items = itemList.get_all().query("type","!=","13");
+	console.log(items);	
+	items.forEach(function(item) {
+		itemList.set_item_field(item.id, "prio", +(parseInt(item.prio)+1)+"");
+	});
+	view_task_list();
+}
+
+
+
+
 function fill_form(form_id, item){
 	var elements = $(form_id).find(".autovalue");
 	
