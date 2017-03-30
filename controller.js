@@ -115,61 +115,32 @@ $(".more-button").click(function() {
 });
  
  
- 
-/*$(".new-issue-button").click(function() {
-	$("#new-item-form").children().show();
-	$("#new-item-form .context").hide();
-	$("#new .menu-title").html("New Project");
-	
-	
-	fill_form("#new-item-form", {title:"", type:"7",  icon:"", prio:"1", parent_id:"-", postpone: ""});	
-	
-	$('#new-item-form select[name="category"]').val($("#category_filter").val()); 
-	if($("#category_filter").val() =="*") $('#new-item-form select[name="category"]').val("-"); 
-	
-	open_page ("#new");
-	$(current_page + " [name='title'] ").focus();
-});*/
 
 // NEW TASK BUTTON ITEM_VIEW
 $("#single_issue .new-task-button").click(function() { 
-	$("#new-item-form").children().show();
-	$("#new-item-form .category_select").hide();
-	$("#new .menu-title").html("New Task for: "+current_item.title);
-	
-	fill_form("#new-item-form", {title:"", type:"6", parent_id: current_item.id,  icon:"", prio:"1", category: current_item.category, postpone: ""});		
-	
-	open_page ("#new");
-	$(current_page + " [name='title'] ").focus();
+	view_new({title:"", type:"6", parent_id: current_item.id,  icon:"", prio:"1", category: current_item.category, postpone: ""});
 });
 
-$("#task_list .new-button").click(function() { 
-	$("#new-controls").toggle();
+// NEW PROJECT BUTTON ITEM_VIEW
+$("#single_issue .new-project-button").click(function() { 
+	view_new( {title:"", type:"7", parent_id: current_item.id,  icon:"", prio:"1", category: current_item.category, postpone: ""});
 });
 
+// NEW TASK BUTTON TASK_LIST (filter view)
+$("#task_list .new-task-button").click(function() { 
+	view_new({title:"", type:"6", parent_id:"", icon:"", prio:"1", category:"-", postpone:""});	
+});
+
+// NEW PROJECT BUTTON TASK_LIST (filter view)
+$("#task_list .new-project-button").click(function() { 
+	view_new({title:"", type:"7", parent_id:"", icon:"", prio:"1", category:"-", postpone:""});
+});
 
 // NEW CHILD 
 $(document).on('click', ".subitem-right", function() {
 	id = $(this).parent().find(".item_id").text();
 	item = itemList.get_item(id);
-	
-	fill_form("#new-item-form", {title:"", type:"6", parent_id: item.id,  icon:"", prio:"1", category: item.category, postpone: ""});	
-
-	$("#new .menu-title").html("New Task for: "+item.title);
-    open_page ("#new");
-	$(current_page + " [name='title'] ").focus();
-
-});
-
-// NEW TASK BUTTON TASK_LIST (filter view)
-$("#task_list .new-task-button").click(function() { 
-	$("#new-item-form").children().show();
-	$("#new .menu-title").html("New Task: No project");
-	
- 	fill_form("#new-item-form", {title:"", type:"6", parent_id:"", icon:"", prio:"1", category:"-", postpone:""});		
-	
-	open_page ("#new");
-	$(current_page + " [name='title'] ").focus();
+	view_new( {title:"", type:"6", parent_id: item.id,  icon:"", prio:"1", category: item.category, postpone: ""});
 });
 
 

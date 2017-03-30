@@ -1,7 +1,7 @@
 /* INIT *******************************************************************/
 var itemList = new Carbon("wiseguy_items");
 
-var current_page = "#issues";
+var current_page = "#task_list";
 var previous_page = "";
 var scroll_positions = [];
 var current_item={};
@@ -37,7 +37,7 @@ var awesomplete = new Awesomplete(input_parent);
 awesomplete.list = itemList.get_quicklist();
 
 
-/* PageHandler class *******************************************************/
+/* PageHandler *******************************************************/
 
 function open_page (page_id, show_extra) {
 	scroll_positions[current_page] = $("body").scrollTop();
@@ -59,8 +59,6 @@ function open_page (page_id, show_extra) {
 
 	if(page_id == "#task_list" || page_id == "#issues" )  $("body").scrollTop(scroll_positions[page_id]);
 	else window.scrollTo(0, 0);
-	
-	
 }
 
 
@@ -69,7 +67,8 @@ function open_page (page_id, show_extra) {
 
 
 function view_task_list(){ 	
-   var query = $("#search").val().toLowerCase();
+	$('.new-item-div').hide();   
+	var query = $("#search").val().toLowerCase();
    var icon = $('input[name="icon"]:checked').val();
 	var category = $("#category_filter").val();
 	var type = $("#type_filter").val();
@@ -122,6 +121,7 @@ open_items =open_items
 
 
 function view_single_issue (id) {
+	$('.new-item-div').hide();   
 	$("#single_issue .menu-title").text(current_item.title);    
 
 	
@@ -156,6 +156,36 @@ function view_single_issue (id) {
 
 	current_item = itemList.get_item(id);
 }
+
+
+
+
+function view_new (parameters) {
+	scroll_positions[current_page] = $("body").scrollTop();
+	previous_page = current_page;
+	current_page = "#new";
+	console.log(parameters.type);	
+	var type = "Task";
+	if(parameters.type == 7) type = "Project";
+	
+console.log(current_item);
+	if(parameters.parent_id)  $("#new .menu-title").html("New "+type+" for: "+itemList.get_item(parameters.parent_id).title);
+	else $("#new .menu-title").html("New "+type);
+	
+	fill_form("#new-item-form", parameters);		
+	
+	
+	$("#new [name='title'] ").focus();
+	
+	console.log("#new");
+	
+	$(".page").hide();
+	$("#new").show();
+
+	window.scrollTo(0, 0);
+}
+
+
 
 
 

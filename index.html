@@ -67,9 +67,16 @@
 			</div> <!--end header-->
 			
 		<! Controls>
-			<div class="controls" style="height:40px; padding: 5px;">
+			<div class="controls" style="height:40px; padding: 5px; position: relative;">
            <input id="search" type="search" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:70px; float:left; margin-left:5px;"/>
-           <button class="new-task-button" style="float:right;">New</button>
+           <button class="new-item-button" style="float:right;" onclick="$('.new-item-div').toggle();">New</button>
+				<div class="new-item-div" style="position: absolute; width: 130px; height:300px; right:0; top: 40px; padding:10px; display:none; text-align: right;">
+					<!--button style="margin-bottom: 10px;">Idea</button><br-->
+					<button  class="new-task-button" style="margin-bottom: 10px;"><img src="img/type6.png" align="middle"> Task</button><br>
+					<button  class="new-project-button"  style="margin-bottom: 10px;"><img src="img/type7.png" align="middle"> Project</button><br>
+					<!--button style="margin-bottom: 10px;">Project Group</button><br>
+					<button style="margin-bottom: 10px;">Document</button-->				
+				</div>
           </div><!-- end controls-->
 
 		<! New types>
@@ -126,8 +133,14 @@
 		<!--button class="home-button"><img src="img/home16.png"</button-->
 		<button onclick="open_page('#task_list');" style="float:left;">Back</button>
 		<button class="up-button" style="float:left; margin-left:5px;">Up</button>
-       <button class="new-task-button" style="float:right;">New</button>
-        
+       <button class="new-item-bu" onclick="$('.new-item-div').toggle();" style="float:right;">New</button>
+        <div class="new-item-div" style="position: absolute; width: 130px; height:300px; right:0; top: 100px; padding:10px; display:none; text-align: right;">
+				<!--button style="margin-bottom: 10px;">Idea</button><br-->
+				<button  class="new-task-button" style="margin-bottom: 10px;"><img src="img/type6.png" align="middle"> Task</button><br>
+				<button  class="new-project-button"  style="margin-bottom: 10px;"><img src="img/type7.png" align="middle"> Project</button><br>
+				<!--button style="margin-bottom: 10px;">Project Group</button><br>
+				<button style="margin-bottom: 10px;">Document</button-->				
+			</div>
         <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
         <! input id="search-item" onkeyup="view_item(current.id);" style="float:right; margin-right:10px;width:150px;" placeholder="Filter"/>
 
