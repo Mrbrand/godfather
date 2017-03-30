@@ -241,8 +241,8 @@
                 <!input name="postpone"  class="autovalue" type="date" min="2015-11-17" max="2025-12-31" />
          <input id="postpone" class="autovalue" type="search" name="postpone" placeholder="Postpone to..." />
 				
-				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#postpone').val(moment().add(1, 'days').format('YYYY-MM-DD ddd'));">Tomorrow</button>	
-				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd')); $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'days')).format('YYYY-MM-DD ddd'));">+1 day</button>	
+				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#postpone').val(moment().format('YYYY-MM-DD ddd'));">Today</button>	
+				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd')); $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'days').format('YYYY-MM-DD ddd'));">+1 day</button>	
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd'));  $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'week')).format('YYYY-MM-DD ddd'));">+1 week</button>
              <! NOTES>       
 				<textarea name="notes" class="autovalue" placeholder="Notes" rows="10"></textarea>
@@ -345,9 +345,10 @@
 				<!input name="postpone"  class="autovalue" type="date" min="2015-11-17" max="2025-12-31" />
 				<input id="postpone" class="autovalue" type="search" name="postpone" placeholder="Postpone to..." />
 				
-				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#edit #postpone').val(moment().add(1, 'days').format('YYYY-MM-DD ddd'));">Tomorrow</button>	
+				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="$('#edit #postpone').val(moment().format('YYYY-MM-DD ddd'));">Today</button>	
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#edit #postpone').val()=='') $('#edit #postpone').val(moment().format('YYYY-MM-DD ddd')); $('#edit #postpone').val((moment($('#edit #postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'days')).format('YYYY-MM-DD ddd'));">+1 day</button>	
 				<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#edit #postpone').val()=='') $('#edit #postpone').val(moment().format('YYYY-MM-DD ddd'));  $('#edit #postpone').val((moment($('#edit #postpone').val(), 'YYYY-MM-DD-ddd').add(1, 'week')).format('YYYY-MM-DD ddd'));">+1 week</button>
+<button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#edit #postpone').val()=='') $('#edit #postpone').val(moment().format('YYYY-MM-DD ddd HH:mm'));  $('#edit #postpone').val((moment($('#edit #postpone').val(), 'YYYY-MM-DD-ddd HH:mm').add(1, 'hour')).format('YYYY-MM-DD ddd HH:mm'));">+1 hour</button>
 
 									
 			<! NOTES >

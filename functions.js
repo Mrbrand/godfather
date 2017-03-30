@@ -73,7 +73,6 @@ function view_task_list(){
    var icon = $('input[name="icon"]:checked').val();
 	var category = $("#category_filter").val();
 	var type = $("#type_filter").val();
-
 	//var sortby = $("#sortby").val();
 
    var open_items=itemList.get_all();
@@ -269,6 +268,7 @@ function item_with_meta(id){
 	item.subitems = open_tasks[0];
 	item.open_task_count = open_tasks.length;
 	item.finished_task_count = finished_tasks.length;
+ 	if(moment(item.postpone, 'YYYY-MM-DD ddd HH:mm') < moment()) item.postpone =""; 
 
 	//parent_tree
 	var parent= itemList.get_item(item.parent_id);
