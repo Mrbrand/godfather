@@ -137,7 +137,7 @@ $("#single_issue .new-task-button").click(function() {
 	$("#new-item-form .category_select").hide();
 	$("#new .menu-title").html("New Task for: "+current_item.title);
 	
-	fill_form("#new-item-form", {title:"", type:"6", parent_id: current_item.id,  icon:"", prio:"2", category: current_item.category, postpone: ""});		
+	fill_form("#new-item-form", {title:"", type:"6", parent_id: current_item.id,  icon:"", prio:"1", category: current_item.category, postpone: ""});		
 	
 	open_page ("#new");
 	$(current_page + " [name='title'] ").focus();
@@ -153,7 +153,7 @@ $(document).on('click', ".subitem-right", function() {
 	id = $(this).parent().find(".item_id").text();
 	item = itemList.get_item(id);
 	
-	fill_form("#new-item-form", {title:"", type:"6", parent_id: item.id,  icon:"", prio:"2", category: item.category, postpone: ""});	
+	fill_form("#new-item-form", {title:"", type:"6", parent_id: item.id,  icon:"", prio:"1", category: item.category, postpone: ""});	
 
 	$("#new .menu-title").html("New Task for: "+item.title);
     open_page ("#new");
@@ -166,7 +166,7 @@ $("#task_list .new-task-button").click(function() {
 	$("#new-item-form").children().show();
 	$("#new .menu-title").html("New Task: No project");
 	
- 	fill_form("#new-item-form", {title:"", type:"6", parent_id:"", icon:"", prio:"2", category:"-", postpone:""});		
+ 	fill_form("#new-item-form", {title:"", type:"6", parent_id:"", icon:"", prio:"1", category:"-", postpone:""});		
 	
 	open_page ("#new");
 	$(current_page + " [name='title'] ").focus();
