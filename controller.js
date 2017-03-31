@@ -128,12 +128,14 @@ $("#single_issue .new-project-button").click(function() {
 
 // NEW TASK BUTTON TASK_LIST (filter view)
 $("#task_list .new-task-button").click(function() { 
-	view_new({title:"", type:"6", parent_id:"", icon:"", prio:"1", category:"-", postpone:""});	
+	var category = $("#category_filter").val(); if (category =="*") category = "-";
+	view_new({title:"", type:"6", parent_id:"", icon:"", prio:"1", category: category, postpone:""});	
 });
 
 // NEW PROJECT BUTTON TASK_LIST (filter view)
 $("#task_list .new-project-button").click(function() { 
-	view_new({title:"", type:"7", parent_id:"", icon:"", prio:"1", category:"-", postpone:""});
+	var category = $("#category_filter").val(); if (category =="*") category = "-";	
+	view_new({title:"", type:"7", parent_id:"", icon:"", prio:"1", category: category, postpone:""});
 });
 
 // NEW CHILD 
