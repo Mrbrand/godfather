@@ -164,28 +164,24 @@ function view_new (parameters) {
 	scroll_positions[current_page] = $("body").scrollTop();
 	previous_page = current_page;
 	current_page = "#new";
-	console.log(parameters.type);	
+	
+	// sätta titel
 	var type = "Task";
 	if(parameters.type == 7) type = "Project";
-	
-console.log(current_item);
 	if(parameters.parent_id)  $("#new .menu-title").html("New "+type+" for: "+itemList.get_item(parameters.parent_id).title);
 	else $("#new .menu-title").html("New "+type);
 	
 	fill_form("#new-item-form", parameters);		
-	
-	
-	//$("#new textarea[name='title'] ").focus();
-	$("#new-item-title").focus();
 
 	console.log("#new");
 	
 	$(".page").hide();
 	$("#new").show();
 
+	$("#new [name='title'] ").focus();
+	
 	window.scrollTo(0, 0);
 }
-
 
 
 
