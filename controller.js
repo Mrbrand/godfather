@@ -33,6 +33,10 @@ $("#category_filter").change(function() {
 	else open_page("#task_list");
 }); 
 
+$("#status_filter").change(function() { 
+ open_page("#task_list");
+}); 
+
 $("#type_filter").change(function() { 
 	 open_page("#task_list");
 }); 
