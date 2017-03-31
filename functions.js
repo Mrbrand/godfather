@@ -175,8 +175,9 @@ console.log(current_item);
 	fill_form("#new-item-form", parameters);		
 	
 	
-	$("#new [name='title'] ").focus();
-	
+	//$("#new textarea[name='title'] ").focus();
+	$("#new-item-title").focus();
+
 	console.log("#new");
 	
 	$(".page").hide();

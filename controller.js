@@ -216,6 +216,14 @@ $(document).on('click', ".task .subitem-left, .issue .subitem-left", function() 
     open_page ("#edit");
 });
 
+// EDIT-BUTTON 
+$("#edit-button").click(function() { 
+	$("#edit .menu-title").html("Edit: "+current_item.title);
+    fill_form("#edit-item-form", current_item);
+    open_page ("#edit");
+});
+
+
 
 // GOTO CATEGORY EDIT  
 $(document).on('click', ".category .subitem-left", function() {

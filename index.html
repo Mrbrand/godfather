@@ -119,13 +119,14 @@
 
 
 			
-<!--SINGLE ISSUE PAGE -------------->
+<!--SINGLE ITEM PAGE -------------->
 	<div id="single_issue" class="page" style="display:none; min-height:450px;">
 	  
 	<div class="header">
-		<div class="menu-title">...</div>
+		<div class="menu-title" style="float:left;">...</div>
 		<!img class="search-button" src="img/star.png"  style="float:right; margin:5px; cursor:pointer;"/>
         <!img class="pref-button" src="img/gear.png"  style="float:right; margin:5px; cursor:pointer;"/>
+ 		<img id="edit-button" src="img/edit.png"  style="float:right; margin:5px; cursor:pointer; height: 24px;"/>
 	</div> <!--end header-->
 	
 	<!--Sub-meny-->
@@ -199,21 +200,11 @@
 			<form id="new-item-form">
 			  
 			  <! TITLE>
-				<textarea name="title" class="autovalue" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
+				<textarea id="new-item-title" name="title" class="autovalue" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
      		
      		 <! CATEGORY>
      			<select name="category" class="category_select autovalue">
 					<option value="-">-no category-</option>
-				</select>
-			
-				<! TYPE >
-				<select name="type" class="autovalue">
-					<option value="4">Idea</option>
-					<option value="6">Task</option>
-					<option value="7">Project</option>
-					<option value="16">Direction</option>
-					<option value="17">Folder</option>
-					<option value="100">Document</option>
 				</select>
 	
 				
@@ -263,7 +254,7 @@
 				
 			 <! hidden >
                 <input name="order" value="0"  type="hidden" />
-                <!input name="type"  class="autovalue" type="hidden" />
+                <input name="type"  class="autovalue" type="hidden" />
 				<input name="parent_id" class="autovalue" type="hidden" />
 				<input name="finish_date"  value="" type="hidden" />
 				
@@ -298,17 +289,6 @@
 				<select name="category" class="category_select autovalue">
 					<option value="-">-no category-</option>
 				</select>
-
-				<! TYPE >
-				<select name="type" class="autovalue">
-					<option value="4">Idea</option>
-					<option value="6">Task</option>
-					<option value="7">Project</option>
-					<option value="16">Direction</option>
-					<option value="17">Folder</option>
-					<option value="100">Document</option>
-				</select>
-	
 
 			<! CONTEXT>
         		<span class="field-description">Context</span>  
@@ -382,7 +362,7 @@
 						<!input class="autovalue" name="type" type="text" /> <!br/>
 						<input class="autovalue" type="text" name="order" />
                     </div>	
-                    
+                   
                     	<! PARENT >
                     <span class="field-description">Parent item in tree</span>
         				<!input class="autovalue" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
@@ -392,18 +372,27 @@
                     <span class="field-description">Make item respawn after finish</span>
                     <input class="autovalue" type="text" name="repeat" placeholder="Respawn after ... days" style="margin-bottom:5px;height:40px; font-size:1.1em" /> <br/>
                                         
-               	
-     			<! CREATED >                                                   
-                    <span class="field-description">Item created</span>
-					<input class="autovalue" name="start_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>	
-                    
-                 <! UPDATED >
-                    <span class="field-description">Last updated</span>
-    				<input class="autovalue" name="update_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
-					
-					<! FINISHED >
-                    <span class="field-description">Finish date</span>
-					<input class="autovalue" name="finish_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
+						<! TYPE >
+						<select name="type" class="autovalue">
+							<option value="4">Idea</option>
+							<option value="6">Task</option>
+							<option value="7">Project</option>
+							<option value="16">Direction</option>
+							<option value="17">Folder</option>
+							<option value="100">Document</option>
+						</select>               	
+	  			
+						<! CREATED >                                                   
+			              <span class="field-description">Item created</span>
+						<input class="autovalue" name="start_date" type="text" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>	
+			              
+			           <! UPDATED >
+			              <span class="field-description">Last updated</span>
+		 				<input class="autovalue" name="update_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
+				
+						<! FINISHED >
+			              <span class="field-description">Finish date</span>
+						<input class="autovalue" name="finish_date" type="text" placeholder="Not set" style="margin-bottom:5px;height:40px; font-size:1.1em"/><br/>
 					
 				</div>
 				
