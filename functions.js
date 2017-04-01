@@ -275,9 +275,9 @@ function mustache_output(output_id, items, template_id, group_by){
 
 
 function item_with_meta(id){
-	var item = JSON.parse(JSON.stringify(itemList.get_item(id)));
-	open_tasks = itemList.get_all().query("finish_date","==","").query("parent_id", "==", id);
-   finished_tasks = itemList.get_all().query("finish_date","!=","").query("parent_id", "==", id);
+	var item = JSON.parse(JSON.stringify(itemList.get_item(id))); //kopia av item
+	open_tasks = itemList.get_all().query("parent_id", "==", id).query("finish_date","==","");
+   finished_tasks = itemList.get_all().query("parent_id", "==", id).query("finish_date","!=","");
     
     // sortera array med items
 	open_tasks.sort(firstBy("order").thenBy("update_date", -1) );
@@ -290,8 +290,10 @@ function item_with_meta(id){
 	//parent_tree
 	var parent= itemList.get_item(item.parent_id);
  	item.parent_tree ="";
-	//item.category_icon = 	itemList.get_item(item.category).icon;
+	console.log(item.category);	
+	if(category = itemList.get_item(item.category)) item.category_icon = 	category.icon;
 	
+
 	var counter = 10;
 	while(parent && (counter-- >0)){	
 		item.parent_tree = "/"+ parent.title + item.parent_tree;
@@ -300,7 +302,6 @@ function item_with_meta(id){
 
 	return item;
 }
-
 
 
 //decrease prio one step for all items
