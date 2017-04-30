@@ -20,21 +20,16 @@ items.forEach(function(item) {
 
 // Manuell sortering 
 Sortable.create(document.getElementById('open'), {handle: '.subitem-right',onSort: function (evt) {
-    var tasks  = itemList.get_all().query("finish_date","==","").query("parent_id", "==", current_item.id);
-    reorder(tasks, evt.oldIndex, evt.newIndex);
+    reorder(evt.oldIndex, evt.newIndex, "order");
 }});
 
 Sortable.create(document.getElementById('categories'), {handle: '.subitem-right',onSort: function (evt) {
-    var categories=itemList.get_all().query("type", "==", 13);
-    reorder(categories, evt.oldIndex, evt.newIndex);
+    reorder(evt.oldIndex, evt.newIndex, "order");
 }});
 
 
 Sortable.create(document.getElementById('tasks'), {draggable: ".item",  handle: '.subitem-right',onSort: function (evt) {
-   // var tasks  = itemList.get_all().query("finish_date","==","").query("type", "!=", 13) //inte kategorier
-	console.log(evt.oldIndex + " " + evt.newIndex);    
-	console.log(current_items);
-	reorder_main(current_items, evt.oldIndex, evt.newIndex);
+	reorder(evt.oldIndex, evt.newIndex, "order_main");
 }});
 
 
@@ -115,7 +110,9 @@ function view_task_list(){
 
 	mustache_output("#tasks", open_items, "#filtered_task_template", "prio");
 
+	//sätta current_items för sortable	
 	current_items = open_items;
+
 	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");  	//om inga items hittas
 }
 
@@ -151,7 +148,9 @@ function view_single_issue (id) {
 	mustache_output("#open", open_items, "#open_task_template"); //! !!!!!!
 	
    mustache_output("#finished", finished_items, "#finished_task_template");
-    
+   
+ 	//sätta current_items för sortable	
+	current_items = open_items;
     // om listan är tom
    if (open_items.length==0 && finished_items.length == 0) $("#open").append("<div class='empty'>No items</div>");
 
@@ -193,6 +192,9 @@ function view_category_list() {
 		.sort(firstBy("order").thenBy("update_date", -1) );
     
     mustache_output("#categories", categories, "#category_template");
+
+	//sätta current_items för sortable	
+	current_items = open_items;
 }
 
 
@@ -218,7 +220,7 @@ function view_settings(){
 
 
 
-function reorder(items, from_pos, to_pos){
+/*function reorder(items, from_pos, to_pos){
     items.sort(firstBy("order").thenBy("update_date", -1) );
     
     var offset = 0;
@@ -239,15 +241,15 @@ function reorder(items, from_pos, to_pos){
     }
     //console.log(items);
     itemList.save(); 
-}
+}*/
 
 
-function reorder_main(items, from_pos, to_pos, field){
+function reorder(from_pos, to_pos, field){
     
     var offset = 0;
     
-    for (var index = 0, len = items.length; index < len; index++) {
-        item = items[index];
+    for (var index = 0, len = current_items.length; index < len; index++) {
+        item = current_items[index];
         
         if (from_pos >= to_pos){
             if(index == (to_pos)) offset++;
@@ -257,12 +259,19 @@ function reorder_main(items, from_pos, to_pos, field){
         }
         
         if(index == from_pos) offset--;
-       	itemList.set_item_field(item.id, "order_main" ,  index + offset);
-        if(index == from_pos) itemList.set_item_field(item.id, "order_main" , to_pos);
+       	itemList.set_item_field(item.id, field,  index + offset);
+			item[field] = index + offset;
+        
+			if(index == from_pos) {
+					itemList.set_item_field(item.id, field , to_pos);
+					item[field] = to_pos;
+				console.log(item[field] );
+			}
 			//console.log(item);(id, field, value)
     }
-    //console.log(items);
-    itemList.save(); 
+    console.log(items);
+	current_items = current_items.sort(firstBy("order_main"));
+   itemList.save(); 
 }
 
 
