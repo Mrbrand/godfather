@@ -103,7 +103,7 @@ $("#import-button").click(function() {
     }
 });
 
-
+// i settings
 $("#prio-decrease-button").click(function() { 
     if (confirm('Decrease prio one step?')==true){
  			prio_decrease();

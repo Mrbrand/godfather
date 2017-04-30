@@ -5,6 +5,7 @@ var current_page = "#task_list";
 var previous_page = "";
 var scroll_positions = [];
 var current_item={};
+var current_items={};
 var debug = new Timer();
 var tags = [];
 
@@ -27,6 +28,15 @@ Sortable.create(document.getElementById('categories'), {handle: '.subitem-right'
     var categories=itemList.get_all().query("type", "==", 13);
     reorder(categories, evt.oldIndex, evt.newIndex);
 }});
+
+
+Sortable.create(document.getElementById('tasks'), {draggable: ".item",  handle: '.subitem-right',onSort: function (evt) {
+   // var tasks  = itemList.get_all().query("finish_date","==","").query("type", "!=", 13) //inte kategorier
+	console.log(evt.oldIndex + " " + evt.newIndex);    
+	console.log(current_items);
+	reorder_main(current_items, evt.oldIndex, evt.newIndex);
+}});
+
 
 set_categories();
 open_page("#task_list");
@@ -101,10 +111,11 @@ function view_task_list(){
  	if(query=="" & icon=="") open_items = open_items.query("prio", "<" ,5); //filtrera bort lågprioriterade om inga filter är valda
    
 	//sortera items
-   open_items.sort(firstBy("prio").thenBy("postpone") .thenBy("update_date", -1));
+   open_items.sort(firstBy("prio").thenBy("postpone") .thenBy("order_main"));
 
 	mustache_output("#tasks", open_items, "#filtered_task_template", "prio");
 
+	current_items = open_items;
 	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");  	//om inga items hittas
 }
 
@@ -231,6 +242,29 @@ function reorder(items, from_pos, to_pos){
 }
 
 
+function reorder_main(items, from_pos, to_pos, field){
+    
+    var offset = 0;
+    
+    for (var index = 0, len = items.length; index < len; index++) {
+        item = items[index];
+        
+        if (from_pos >= to_pos){
+            if(index == (to_pos)) offset++;
+        }
+        else{
+            if (index == (to_pos+1)) offset++;
+        }
+        
+        if(index == from_pos) offset--;
+       	itemList.set_item_field(item.id, "order_main" ,  index + offset);
+        if(index == from_pos) itemList.set_item_field(item.id, "order_main" , to_pos);
+			//console.log(item);(id, field, value)
+    }
+    //console.log(items);
+    itemList.save(); 
+}
+
 
 
 function set_categories(){
@@ -260,7 +294,7 @@ function mustache_output(output_id, items, template_id, group_by){
 			if (item[group_by]!= new_group)  {
 				
 				prio_item_count = items.query(group_by,"==",item[group_by]).length;
-				html += "<div style='padding:3px; background:#333;color:#AAA;'>"+prio_item_count+"<img src='img/prio"+item[group_by]+".png'></div>";
+				html += "<div class='group' style='padding:3px; background:#333;color:#AAA;'>"+prio_item_count+"<img src='img/prio"+item[group_by]+".png'></div>";
 		   	}
 				new_group=item[group_by]; 
 			}
@@ -290,7 +324,7 @@ function item_with_meta(id){
 	//parent_tree
 	var parent= itemList.get_item(item.parent_id);
  	item.parent_tree ="";
-	console.log(item.category);	
+	//console.log(item.category);	
 	if(category = itemList.get_item(item.category)) item.category_icon = 	category.icon;
 	
 
