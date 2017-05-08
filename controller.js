@@ -83,12 +83,12 @@ $(".finish-button").click(function() {
         
         if(item.repeat){
             var item_copy = itemList.copy(item.id);
-            item_copy["postpone"] = moment().add( item.repeat, 'days').format('YYYY-MM-DD');   
+            item_copy["postpone"] = moment().add( item.repeat, 'days').format('YYYY-MM-DD ddd');   
             //itemList.add_item(item_copy);   
         }
         
 	    itemList.set_item_field(item.id, "finish_date", moment().format('YYYY-MM-DD HH:mm:ss'))
-	            
+	     itemList.save();	       
         open_page(previous_page);
         //$("body").scrollTop(scroll_position);
         
@@ -133,13 +133,15 @@ $("#single_issue .new-project-button").click(function() {
 // NEW TASK BUTTON TASK_LIST (filter view)
 $("#task_list .new-task-button").click(function() { 
 	var category = $("#category_filter").val(); if (category =="*") category = "-";
-	view_new({title:"", type:"6", parent_id:"", icon:"", prio:"1", category: category, postpone:""});	
+	var title = $("#search").val(); 		
+	view_new({title:title, type:"6", parent_id:"", icon:"", prio:"1", category: category, postpone:""});	
 });
 
 // NEW PROJECT BUTTON TASK_LIST (filter view)
 $("#task_list .new-project-button").click(function() { 
+	var title = $("#search").val(); 	
 	var category = $("#category_filter").val(); if (category =="*") category = "-";	
-	view_new({title:"", type:"7", parent_id:"", icon:"", prio:"1", category: category, postpone:""});
+	view_new({title:title, type:"7", parent_id:"", icon:"", prio:"1", category: category, postpone:""});
 });
 
 // NEW CHILD 

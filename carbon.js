@@ -129,9 +129,6 @@ Carbon.prototype.get_quicklist = function() {
 };
 
 
-
-
-
 Carbon.prototype.set_item_field = function(id, field, value) {
     for(var i in this.itemArray){
 		if(this.itemArray[i].id==id){
@@ -139,7 +136,7 @@ Carbon.prototype.set_item_field = function(id, field, value) {
             break;
 	    }
 	}
-	this.save();
+	//this.save();
 };
 
 Carbon.prototype.import_json = function(json) {

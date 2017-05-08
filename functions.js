@@ -97,7 +97,7 @@ function view_task_list(){
 
 	//filtrera beroende på filter-fält
 	if (status=="unfinished") open_items = open_items.query("finish_date", "==", ""); 	// filtrera bort avslutade
-	else open_items = open_items.query("finish_date", "!=", ""), console.log("hej"); 	// filtrera bort oavslutade
+	else open_items = open_items.query("finish_date", "!=", ""); 	// filtrera bort oavslutade
   	if (query=="" & category=="*") 	open_items = open_items.query("prio", "<" ,prio_filter); 	// filtrera bort lågprioriterade (snabbhet)
 	if (query=="" & type=="*") 	open_items = open_items.query("open_task_count", "==", 0);		// filtrera bort projekt som redan har subtask
 	if(category!="*") open_items=open_items.query("category", "==", category); 	// filtrera på kategori om kategori är vald	
@@ -106,7 +106,7 @@ function view_task_list(){
  	if(query=="" & icon=="") open_items = open_items.query("prio", "<" ,5); //filtrera bort lågprioriterade om inga filter är valda
    
 	//sortera items
-   open_items.sort(firstBy("prio").thenBy("postpone") .thenBy("order_main"));
+   open_items.sort(firstBy("finish_date","-1").thenBy("prio").thenBy("postpone") .thenBy("order_main"));
 
 	mustache_output("#tasks", open_items, "#filtered_task_template", "prio");
 
@@ -120,8 +120,9 @@ function view_task_list(){
 
 function view_single_issue (id) {
 	$('.new-item-div').hide();   
+	$("#single_issue .type-icon").html("<img src='img/type"+current_item.type+".png'>");    	
 	$("#single_issue .menu-title").text(current_item.title);    
-
+	
 	
 
 	var open_items = itemList.get_all();
@@ -217,40 +218,15 @@ function view_settings(){
     $("#export_count").append(items.query("finish_date", "!=", "").length+" finished items");
 }
 
-
-
-
-/*function reorder(items, from_pos, to_pos){
-    items.sort(firstBy("order").thenBy("update_date", -1) );
-    
-    var offset = 0;
-    
-    for (var index = 0, len = items.length; index < len; index++) {
-        item = items[index];
-        
-        if (from_pos >= to_pos){
-            if(index == (to_pos)) offset++;
-        }
-        else{
-            if (index == (to_pos+1)) offset++;
-        }
-        
-        if(index == from_pos) offset--;
-        item.order = index + offset;
-        if(index == from_pos) item.order = to_pos;
-    }
-    //console.log(items);
-    itemList.save(); 
-}*/
-
-
 function reorder(from_pos, to_pos, field){
-    
+
     var offset = 0;
-    
+    //debug.begin("reorder");
+	
     for (var index = 0, len = current_items.length; index < len; index++) {
-        item = current_items[index];
         
+			item = current_items[index];
+ 			       
         if (from_pos >= to_pos){
             if(index == (to_pos)) offset++;
         }
@@ -259,19 +235,24 @@ function reorder(from_pos, to_pos, field){
         }
         
         if(index == from_pos) offset--;
-       	itemList.set_item_field(item.id, field,  index + offset);
+      
+			itemList.set_item_field(item.id, field,  index + offset);
 			item[field] = index + offset;
-        
+
+
 			if(index == from_pos) {
 					itemList.set_item_field(item.id, field , to_pos);
 					item[field] = to_pos;
-				console.log(item[field] );
+				//console.log(item[field] );
 			}
 			//console.log(item);(id, field, value)
+			
     }
-    console.log(items);
+    //console.log(items);
+  
 	current_items = current_items.sort(firstBy("order_main"));
    itemList.save(); 
+	//debug.stop();
 }
 
 
@@ -311,7 +292,7 @@ function mustache_output(output_id, items, template_id, group_by){
 		//console.log(item);
 		html += Mustache.to_html(template, item);
 	});
-	//if($('#debug').prop("checked")) debug.comment("html sträng klar");
+	
 	$(output_id).append(html);
 }
 
@@ -354,6 +335,7 @@ function prio_decrease(){
 	items.forEach(function(item) {
 		itemList.set_item_field(item.id, "prio", +(parseInt(item.prio)+1)+"");
 	});
+	itemList.save();	
 	view_task_list();
 }
 
