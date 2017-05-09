@@ -250,6 +250,21 @@
   						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
   						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
         		</div>
+
+
+				<! CATEGORY >		
+						<select name="scope" class="autovalue">
+							<option value="">-no scope-</option>
+							<option value="2 min">2 min</option>
+							<option value="5 min">5 min</option>
+							<option value="10 min">10 min</option>
+							<option value="30 min">30 min</option>
+							<option value="1 hours">1 hours</option>
+							<option value="2 hours">2 hours</option>
+							<option value="4 hours">4 hours</option>
+							<option value="10 hours">10 hours</option>
+							</select>
+
 		    <! POSTPONE>
                 <!input name="postpone"  class="autovalue" type="date" min="2015-11-17" max="2025-12-31" />
          <input id="postpone" class="autovalue" type="search" name="postpone" placeholder="Postpone to..." />
@@ -298,11 +313,6 @@
 			<! TITLE >
 				<input class="autovalue" name="title" type="text" style="margin-bottom:5px; height:50px; font-size:1.3em"/><br/>
 				
-		<! CATEGORY >		
-				<select name="category" class="category_select autovalue">
-					<option value="-">-no category-</option>
-				</select>
-
 			<! CONTEXT>
         		<span class="field-description">Context</span>  
   
@@ -318,19 +328,7 @@
 							<label><input type="radio" name="icon" value="" /><span>none</span></label>
         	</div>
 
-					<!--div class="project-icons icons" style="margin: 10px 0;">
-		           <label><input type="radio" name="icon" value="🐰" /><span>🐰</span></label>
-							<label><input type="radio" name="icon" value="🏁" /><span>🏁</span></label>
-							<label><input type="radio" name="icon" value="💡" /><span>💡</span></label>
-							<label><input type="radio" name="icon" value="🔥" /><span>🔥</span></label>
-							<label><input type="radio" name="icon" value="⚡" /><span>⚡</span></label>
-							<label><input type="radio" name="icon" value="😱" /><span>😱</span></label>
-							<label><input type="radio" name="icon" value="🐣" /><span>🐣</span></label>
-							<label><input type="radio" name="icon" value="" /><span>none</span></label>
-        	</div-->
-        		<!--div style="display:inline;">
-        			<input class="autovalue" name="icon" placeholder ="..." style="margin: 10px 0;  width:40px; height:40px; font-size:30px;text-align: center; background: transparent; border: none; > "/>
-           		</div-->
+		
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
 		            <!...>
@@ -346,7 +344,19 @@
   						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
   						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
         		</div>
-
+		
+				<! CATEGORY >		
+						<select name="scope" class="autovalue">
+							<option value="">-no scope-</option>
+							<option value="2 min">2 min</option>
+							<option value="5 min">5 min</option>
+							<option value="10 min">10 min</option>
+							<option value="30 min">30 min</option>
+							<option value="1 hours">1 hours</option>
+							<option value="2 hours">2 hours</option>
+							<option value="4 hours">4 hours</option>
+							<option value="10 hours">10 hours</option>
+							</select>
            
          <! POSTPONE >   
                 <span class="field-description">Postpone</span>    
@@ -381,13 +391,18 @@
                    
                     	<! PARENT >
                     <span class="field-description">Parent item in tree</span>
-        				<!input class="autovalue" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+        					<!input class="autovalue" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
                     <input id="parent" class="autovalue"  type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
                     
                     <! RESPAWN >
                     <span class="field-description">Make item respawn after finish</span>
                     <input class="autovalue" type="text" name="repeat" placeholder="Respawn after ... days" style="margin-bottom:5px;height:40px; font-size:1.1em" /> <br/>
                                         
+						<! CATEGORY >		
+						<select name="category" class="category_select autovalue">
+							<option value="-">-no category-</option>
+						</select>
+
 						<! TYPE >
 						<select name="type" class="autovalue">
 							<option value="4">Idea</option>
@@ -645,12 +660,12 @@
 <script id="filtered_task_template" type="text/template">
 	<div class="item task {{#postpone}} postponed{{/postpone}}">
 						
-		<div class="subitem-left quick_edit_item">
+		<div class="subitem-left quick_edit_item" style="line-height: 90%;">
 			
     		{{#icon}}<div style="font-size: 22px; margin:10px 7px 0 7px; ">{{icon}}</div>{{/icon}}
 			{{^icon}}<img class="type-icon" style="margin:10px 7px 0 7px; height:32px;" src="img/type{{type}}.png"/>{{/icon}}
             <img class="prio-icon" src="img/prio{{prio}}.png"/>
-            <span style="color:#888;">{{order_main}}</span>
+            {{#scope}}<span style="padding:1px 2px ; border-radius:3px; font-size:10px;background: #ABC; color:#456; margin-left:5px;">{{scope}}</span>{{/scope}}
 		</div>
 		
 		 <div class="subitem-right" style="width:30px; float: right;  height:40px; padding:15px 20px 10px 20px;;">
