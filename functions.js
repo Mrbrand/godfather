@@ -89,26 +89,35 @@ function view_task_list(){
 	});
 	open_items = open_items_with_meta;
 
+	//filtrera allmänt
 	open_items =open_items
 		.query("type", "!=", 13) //inte kategorier
 	//	.query("finish_date", "==", "")
 		.query("notes", "!=", undefined) //ful-fix för att undvika crash vid filter nedan, (items som saknar notes)
 		.query("title, notes, parent_tree", "contains", query);
 
-	//filtrera beroende på filter-fält
-	if (status=="unfinished") open_items = open_items.query("finish_date", "==", ""); 	// filtrera bort avslutade
-	else open_items = open_items.query("finish_date", "!=", ""); 	// filtrera bort oavslutade
-  	if (query=="" & category=="*") 	open_items = open_items.query("prio", "<" ,prio_filter); 	// filtrera bort lågprioriterade (snabbhet)
+	if (query=="" & category=="*") 	open_items = open_items.query("prio", "<" ,prio_filter); 	// filtrera bort lågprioriterade (snabbhet)
 	if (query=="" & type=="*") 	open_items = open_items.query("open_task_count", "==", 0);		// filtrera bort projekt som redan har subtask
 	if(category!="*") open_items=open_items.query("category", "==", category); 	// filtrera på kategori om kategori är vald	
 	if(type!="*") open_items=open_items.query("type", "==", type); 	// filtrera på kategori om kategori är vald	
    if(icon) open_items=open_items.query("icon", "==", icon); 	// filtrera på ikon om ikon är vald	
  	if(query=="" & icon=="") open_items = open_items.query("prio", "<" ,5); //filtrera bort lågprioriterade om inga filter är valda
-   
-	//sortera items
-   open_items.sort(firstBy("finish_date","-1").thenBy("prio").thenBy("postpone") .thenBy("order_main"));
+  	
+	//filtrera beroende på filter-fält
+	if (status=="unfinished") {
+		open_items = open_items.query("finish_date", "==", ""); 	// filtrera bort avslutade
+	
+		//sortera items
+		open_items.sort(firstBy("finish_date","-1").thenBy("prio").thenBy("postpone") .thenBy("order_main"));
 
-	mustache_output("#tasks", open_items, "#filtered_task_template", "prio");
+		mustache_output("#tasks", open_items, "#filtered_task_template", "prio");
+	}
+	else {
+		open_items = open_items.query("finish_date", "!=", ""); 	// filtrera bort oavslutade
+  		open_items.sort(firstBy("finish_date",-1));
+
+		mustache_output("#tasks", open_items, "#finished_task_template", "finish_day");
+	}
 
 	//sätta current_items för sortable	
 	current_items = open_items;
@@ -276,15 +285,17 @@ function mustache_output(output_id, items, template_id, group_by){
     //console.log(items);
 	var new_group = "";
     var html="";
- 	
+ 	var scope_sum = 0;
     $(output_id).empty();
  	
     items.forEach(function(item) {
 		if(group_by){
 			if (item[group_by]!= new_group)  {
-				
-				prio_item_count = items.query(group_by,"==",item[group_by]).length;
-				html += "<div class='group' style='padding:3px; background:#333;color:#AAA;'>"+prio_item_count+"<img src='img/prio"+item[group_by]+".png'></div>";
+				scope_sum = 0;
+				item_count = items.query(group_by,"==",item[group_by]).length;
+				items.query(group_by,"==",item[group_by]).forEach(function(item) {if(item.scope ==0) item.scope = 0; scope_sum += parseInt(item.scope);	});
+
+				html += "<div class='group' style='padding:3px; background:#333;color:#AAA;'>"+item[group_by]+" Count:"+item_count+" Time:"+scope_sum+"</div>";
 		   	}
 				new_group=item[group_by]; 
 			}
@@ -311,6 +322,8 @@ function item_with_meta(id){
 	item.finished_task_count = finished_tasks.length;
  	if(moment(item.postpone, 'YYYY-MM-DD ddd HH:mm') < moment()) item.postpone =""; 
 
+	item.finish_day = item.finish_date.substring(0, 10)
+	
 	//parent_tree
 	var parent= itemList.get_item(item.parent_id);
  	item.parent_tree ="";
