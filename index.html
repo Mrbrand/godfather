@@ -69,6 +69,12 @@
 		<! Controls>
 			<div class="controls" style="height:40px; padding: 5px; position: relative;">
            <input id="search" type="search" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:70px; float:left; margin-left:5px;"/>
+				
+			<select id="status_filter" style="background-color: rgba(255,255,255,.1); font-size:12pt; width:130px; float:left; margin-left:10px;">
+					<option value="unfinished" selected="selected">unfinished</option>
+					<option value="finished">finished</option>
+				</select>
+
            <button class="new-item-button" style="float:right;" onclick="$('.new-item-div').toggle();">New</button>
 				<div class="new-item-div" style="position: absolute; width: 130px; height:300px; right:0; top: 40px; padding:10px; display:none; text-align: right;">
 					<!--button style="margin-bottom: 10px;">Idea</button><br-->
@@ -105,10 +111,7 @@
 					<label><input type="radio" name="icon" value="" checked="checked" /><span>All</span></label>
         		</div>
 
-				<select id="status_filter" style="background-color: rgba(255,255,255,.1); font-size:12pt; width:30px; float:left;">
-					<option value="unfinished" selected="selected">unfinished</option>
-					<option value="finished">finished</option>
-				</select>
+			
 					
 			<button onclick="$('#extra-controls').hide();" style="float:right;">X</button>
 			

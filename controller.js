@@ -87,9 +87,10 @@ $(".finish-button").click(function() {
             //itemList.add_item(item_copy);   
         }
         
-	    itemList.set_item_field(item.id, "finish_date", moment().format('YYYY-MM-DD HH:mm:ss'))
-	     itemList.save();	       
-        open_page(previous_page);
+	    itemList.set_item_field(item.id, "finish_date", moment().format('YYYY-MM-DD HH:mm:ss'));
+		 itemList.set_item_field(item.id, "postpone", "")
+	    itemList.save();	       
+       open_page(previous_page);
         //$("body").scrollTop(scroll_position);
         
  });

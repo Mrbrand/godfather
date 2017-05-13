@@ -292,10 +292,10 @@ function mustache_output(output_id, items, template_id, group_by){
 		if(group_by){
 			if (item[group_by]!= new_group)  {
 				scope_sum = 0;
-				item_count = items.query(group_by,"==",item[group_by]).length;
-				items.query(group_by,"==",item[group_by]).forEach(function(item) {if(isNaN(item.scope)) item.scope = 0; scope_sum += parseInt(item.scope);	});
+				item_count = items.query(group_by,"==",item[group_by]).query("postpone", "==", "").length;
+				items.query(group_by,"==",item[group_by]).query("postpone", "==", "").query("type", "==", "6").forEach(function(item) {if(isNaN(item.scope) || item.scope =="" ) item.scope = 0; scope_sum += parseInt(item.scope);	});
 
-				html += "<div class='group' style='padding:3px; background:#333;color:#AAA;'>"+item[group_by]+" Count:"+item_count+" Time:"+scope_sum+"</div>";
+				html += "<div class='group' style='padding:3px; background:#333;color:#AAA;'>("+item[group_by]+") Count:"+item_count+" Time:"+scope_sum+"</div>";
 		   	}
 				new_group=item[group_by]; 
 			}
@@ -322,7 +322,7 @@ function item_with_meta(id){
 	item.finished_task_count = finished_tasks.length;
  	if(moment(item.postpone, 'YYYY-MM-DD ddd HH:mm') < moment()) item.postpone =""; 
 
-	item.finish_day = item.finish_date.substring(0, 10)
+	item.finish_day = moment(item.finish_date,'YYYY-MM-DD HH:mm').format('YYYY-MM-DD ddd');
 	
 	//parent_tree
 	var parent= itemList.get_item(item.parent_id);
