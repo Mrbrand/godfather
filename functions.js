@@ -293,7 +293,7 @@ function mustache_output(output_id, items, template_id, group_by){
 			if (item[group_by]!= new_group)  {
 				scope_sum = 0;
 				item_count = items.query(group_by,"==",item[group_by]).length;
-				items.query(group_by,"==",item[group_by]).forEach(function(item) {if(item.scope =="") item.scope = 0; scope_sum += parseInt(item.scope);	});
+				items.query(group_by,"==",item[group_by]).forEach(function(item) {if(isNaN(item.scope)) item.scope = 0; scope_sum += parseInt(item.scope);	});
 
 				html += "<div class='group' style='padding:3px; background:#333;color:#AAA;'>"+item[group_by]+" Count:"+item_count+" Time:"+scope_sum+"</div>";
 		   	}
