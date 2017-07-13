@@ -5,6 +5,7 @@
     	
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta content="minimum-scale=1.0, width=device-width, maximum-scale=0.6667, user-scalable=no" name="viewport" />
+<meta name="format-detection" content="telephone=yes" />
         <!meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<meta content="yes" name="apple-mobile-web-app-capable" />
 		<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type" />
@@ -68,11 +69,19 @@
 			
 		<! Controls>
 			<div class="controls" style="height:40px; padding: 5px; position: relative;">
-           <input id="search" type="search" onkeyup="view_task_list();" placeholder="Search..." value="" style="width:70px; float:left; margin-left:5px;"/>
+           <input id="search" type="search" placeholder="Search..." value="" style="width:70px; float:left; margin-left:5px;"/>
 				
-			<select id="status_filter" style="background-color: rgba(255,255,255,.1); font-size:12pt; width:130px; float:left; margin-left:10px;">
+			<select id="status_filter" style="background-color: rgba(255,255,255,.1); font-size:12pt; width:110px; float:left; margin-left:10px;">
 					<option value="unfinished" selected="selected">unfinished</option>
 					<option value="finished">finished</option>
+				</select>
+
+				<select id="prio_filter" style="background-color: rgba(255,255,255,.1); font-size:12pt; width:80px; float:left; margin-left:10px;">
+					<option value="2" selected="selected">Prio 1</option>
+					<option value="3">Prio 2</option>
+					<option value="4">Prio 3</option>
+					<option value="5">Prio 4</option>
+					<option value="6">Prio 5</option>
 				</select>
 
            <button class="new-item-button" style="float:right;" onclick="$('.new-item-div').toggle();">New</button>
@@ -261,6 +270,7 @@
 							<option value="2">2 min</option>
 							<option value="5">5 min</option>
 							<option value="10">10 min</option>
+							<option value="15">15 min</option>
 							<option value="20">20 min</option>
 							<option value="30">30 min</option>
 							<option value="60">1 hours</option>
@@ -355,6 +365,7 @@
 							<option value="2">2 min</option>
 							<option value="5">5 min</option>
 							<option value="10">10 min</option>
+							<option value="15">15 min</option>
 							<option value="20">20 min</option>
 							<option value="30">30 min</option>
 							<option value="60">1 hours</option>
@@ -543,10 +554,6 @@
 					<span style="color:gray; margin-left:3px; font-size:9pt;">show postponed</span>
            			<br/><br/>
             	
-            <input id="prio_filter" type="text" style="width:25px; float:left; margin-left:5px;" value="3">
-				<span style="color:gray; margin-left:3px; font-size:9pt;">prio filter</span>
-            	<br/><br/>
-            
             Export filter <br/>
             <input id="field1" style="width:100px">
             <select id="op1" style="width:50px;">

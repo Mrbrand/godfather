@@ -79,6 +79,7 @@ function view_task_list(){
 	var category = $("#category_filter").val();
 	var type = $("#type_filter").val();
 	var status = $("#status_filter").val();
+	var prio = $("#prio_filter").val();
 
    var open_items=itemList.get_all();
 	var open_items_with_meta = [];
@@ -101,7 +102,7 @@ function view_task_list(){
 	if(category!="*") open_items=open_items.query("category", "==", category); 	// filtrera på kategori om kategori är vald	
 	if(type!="*") open_items=open_items.query("type", "==", type); 	// filtrera på kategori om kategori är vald	
    if(icon) open_items=open_items.query("icon", "==", icon); 	// filtrera på ikon om ikon är vald	
- 	if(query=="" & icon=="") open_items = open_items.query("prio", "<" ,5); //filtrera bort lågprioriterade om inga filter är valda
+ 	if(query=="" & icon=="") open_items = open_items.query("prio", "<" ,prio); //filtrera bort lågprioriterade om inga filter är valda
   	
 	//filtrera beroende på filter-fält
 	if (status=="unfinished") {

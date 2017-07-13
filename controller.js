@@ -37,6 +37,10 @@ $("#status_filter").change(function() {
  open_page("#task_list");
 }); 
 
+$("#prio_filter").change(function() { 
+ open_page("#task_list");
+}); 
+
 $("#type_filter").change(function() { 
 	 open_page("#task_list");
 }); 
@@ -45,7 +49,12 @@ $("#type_filter").change(function() {
 $("#search").focus(function() { 
     $("#extra-controls").show();
 }); 
- 
+
+$("#search").keyup(function() { 
+	if($("#search").val().length >1)    
+		open_page("#task_list");
+}); 
+
 $(".delete-button").click(function() {
 	id = $(current_page+" form .item-id").val();
     if (confirm('Delete "'+itemList.get_item(id).title+'"?')==true) {
