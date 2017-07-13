@@ -86,12 +86,15 @@ function view_task_list(){
    var open_items=itemList.get_all();
 	var open_items_with_meta = [];
 	
+	debug.comment("Före metadata");
 	//lägga till metadata så som parent_tree, subitem_count, etc 
 	open_items.forEach(function(item) {
 		open_items_with_meta.push(item_with_meta(item.id));
 	});
 	open_items = open_items_with_meta;
 
+	debug.comment("Efter metadata");
+	
 	//filtrera allmänt
 	open_items =open_items
 		.query("type", "!=", 13) //inte kategorier
