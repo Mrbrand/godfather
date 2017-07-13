@@ -22,7 +22,7 @@ Timer.prototype.stop = function() {
     this.comments.push({diff:diff, comment:"Finished"})
     
     this.comments.forEach(function(comment) {
-      output += comment.comment +": "+comment.diff+"\n";
+      output += comment.comment +": "+comment.diff+"  ms\n";
     });
   alert(output);
 };

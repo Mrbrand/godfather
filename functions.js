@@ -74,6 +74,8 @@ function open_page (page_id, show_extra) {
 function view_task_list(){ 	
 	$('.new-item-div').hide();   
 	
+	debug.begin("Task_list");
+
 	var query = $("#search").val().toLowerCase();
    var icon = $('input[name="icon"]:checked').val();
 	var category = $("#category_filter").val();
@@ -104,6 +106,7 @@ function view_task_list(){
    if(icon) open_items=open_items.query("icon", "==", icon); 	// filtrera på ikon om ikon är vald	
  	if(query=="" & icon=="") open_items = open_items.query("prio", "<" ,prio); //filtrera bort lågprioriterade om inga filter är valda
   	
+	debug.comment("Efter filter");
 	//filtrera beroende på filter-fält
 	if (status=="unfinished") {
 		open_items = open_items.query("finish_date", "==", ""); 	// filtrera bort avslutade
@@ -124,6 +127,8 @@ function view_task_list(){
 	current_items = open_items;
 
 	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");  	//om inga items hittas
+
+	if(document.getElementById('debug').checked) debug.stop("Slut");
 }
 
 
