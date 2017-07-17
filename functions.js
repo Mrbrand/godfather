@@ -83,53 +83,55 @@ function view_task_list(){
 	var status = $("#status_filter").val();
 	var prio = $("#prio_filter").val();
 
-   var open_items=itemList.get_all();
-	var open_items_with_meta = [];
+   var items=itemList.get_all();
+	var items_with_meta = [];
 	
+	if (query=="" & category=="*") 	items = items.query("prio", "<" ,prio_filter); 	// filtrera bort lågprioriterade (snabbhet)
+	if(category!="*") items=items.query("category", "==", category); 	// filtrera på kategori om kategori är vald	
+	if(type!="*") items=items.query("type", "==", type); 	// filtrera på kategori om kategori är vald	
+	if(icon) items=items.query("icon", "==", icon); 	// filtrera på ikon om ikon är vald	
+ 	if(query=="" & icon=="") items = items.query("prio", "<" ,prio); //filtrera bort lågprioriterade om inga filter är valda
+		
 	debug.comment("Före metadata");
-	//lägga till metadata så som parent_tree, subitem_count, etc 
-	open_items.forEach(function(item) {
-		open_items_with_meta.push(item_with_meta(item.id));
-	});
-	open_items = open_items_with_meta;
-
-	debug.comment("Efter metadata");
 	
-	//filtrera allmänt
-	open_items =open_items
-		.query("type", "!=", 13) //inte kategorier
-	//	.query("finish_date", "==", "")
-		.query("notes", "!=", undefined) //ful-fix för att undvika crash vid filter nedan, (items som saknar notes)
-		.query("title, notes, parent_tree", "contains", query);
-
-	if (query=="" & category=="*") 	open_items = open_items.query("prio", "<" ,prio_filter); 	// filtrera bort lågprioriterade (snabbhet)
-	if (query=="" & type=="*") 	open_items = open_items.query("open_task_count", "==", 0);		// filtrera bort projekt som redan har subtask
-	if(category!="*") open_items=open_items.query("category", "==", category); 	// filtrera på kategori om kategori är vald	
-	if(type!="*") open_items=open_items.query("type", "==", type); 	// filtrera på kategori om kategori är vald	
-   if(icon) open_items=open_items.query("icon", "==", icon); 	// filtrera på ikon om ikon är vald	
- 	if(query=="" & icon=="") open_items = open_items.query("prio", "<" ,prio); //filtrera bort lågprioriterade om inga filter är valda
-  	
-	debug.comment("Efter filter");
-	//filtrera beroende på filter-fält
+	//UNFINISHED ITEMS
 	if (status=="unfinished") {
-		open_items = open_items.query("finish_date", "==", ""); 	// filtrera bort avslutade
-	
+		items = items.query("finish_date", "==", ""); 	// filtrera bort avslutade
+		
+		//lägga till metadata så som parent_tree, subitem_count, etc 
+		items.forEach(function(item) {
+			items_with_meta.push(item_with_meta(item.id));
+		});
+		items = items_with_meta;
+		debug.comment("Efter metadata");
+		if (query=="" & type=="*") 	items = items.query("open_task_count", "==", 0);		// filtrera bort projekt som redan har subtask
+		
+		//filtrera allmänt
+		items =items
+			.query("type", "!=", 13) //inte kategorier
+			//	.query("finish_date", "==", "")
+			.query("notes", "!=", undefined) //ful-fix för att undvika crash vid filter nedan, (items som saknar notes)
+			.query("title, notes, parent_tree", "contains", query);
+
 		//sortera items
-		open_items.sort(firstBy("finish_date","-1").thenBy("prio").thenBy("postpone") .thenBy("order_main"));
-
-		mustache_output("#tasks", open_items, "#filtered_task_template", "prio");
+		items.sort(firstBy("finish_date","-1").thenBy("prio").thenBy("postpone") .thenBy("order_main"));
+		
+		mustache_output("#tasks", items, "#filtered_task_template", "prio");
 	}
-	else {
-		open_items = open_items.query("finish_date", "!=", ""); 	// filtrera bort oavslutade
-  		open_items.sort(firstBy("finish_date",-1));
+		//finished items
+	else { 
+		items = items.query("finish_date", "!=", ""); 	// filtrera bort oavslutade
+  		items.sort(firstBy("finish_date",-1));
 
-		mustache_output("#tasks", open_items, "#finished_task_template", "finish_day");
+		mustache_output("#tasks", items, "#finished_task_template", "finish_day");
 	}
+
+	
 
 	//sätta current_items för sortable	
-	current_items = open_items;
+	current_items = items;
 
-	if (open_items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");  	//om inga items hittas
+	if (items.length == 0) $("#open_items").append("<div class='empty'>No items here</div>");  	//om inga items hittas
 
 	if(document.getElementById('debug').checked) debug.stop("Slut");
 }
