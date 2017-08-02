@@ -221,14 +221,13 @@
 			  
 			  <! TITLE>
 				<textarea id="new-item-title" name="title" class="autovalue" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
-     		
-     		 <! CATEGORY>
-     			<select name="category" class="category_select autovalue">
-					<option value="-">-no category-</option>
-				</select>
-	
-				
-     		<! CONTEXT>
+     			
+			<! PARENT >
+                    <span class="field-description">Parent item in tree</span>
+        					<!input class="autovalue" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+                    <input id="parent2" class="autovalue"  type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+     		 
+			<! CONTEXT>
         		<span class="field-description context">Context</span>  
         		
         		<!--div style="display:inline;">
@@ -238,21 +237,21 @@
            	<div class="context" style="margin: 10px 0;">
 		          <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
 					<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
-					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
 					<label><input type="radio" name="icon" value="📱" /><span>📱</span></label>
+					<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
+					<label><input type="radio" name="icon" value="🚶" /><span>🚶</span></label>
 					<label><input type="radio" name="icon" value="📝" /><span>📝</span></label>
 					<label><input type="radio" name="icon" value="🚘" /><span>🚘</span></label>
 					<label><input type="radio" name="icon" value="🎓" /><span>🎓</span></label>
-					<label><input type="radio" name="icon" value="📆" /><span>📆</span></label>
+					
 					<label><input type="radio" name="icon" value="" /><span>none</span></label>
         		</div>
         		
         		<div class="context" style="margin: 10px 0; display:inline;">
 		            <!...>
         		</div>
-        		
-        		
-            <! PRIO>
+
+ 			<! PRIO>
             	<span class="field-description">Prio</span>  
 				 <div style="margin: 10px 0;">
 		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
@@ -263,9 +262,20 @@
   						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
         		</div>
 
+		<! CATEGORY>
+     			<select name="category" class="category_select autovalue">
+					<option value="-">-no category-</option>
+				</select>
+	
+				
+     		
+        		
+        		
+           
 
-				<! CATEGORY >		
-						<select name="scope" class="autovalue">
+
+				<!Scope >		
+						<!--select name="scope" class="autovalue">
 							<option value="">-no scope-</option>
 							<option value="2">2 min</option>
 							<option value="5">5 min</option>
@@ -277,7 +287,7 @@
 							<option value="120">2 hours</option>
 							<option value="240">4 hours</option>
 							<option value="600">10 hours</option>
-							</select>
+							</select-->
 
 		    <! POSTPONE>
                 <!input name="postpone"  class="autovalue" type="date" min="2015-11-17" max="2025-12-31" />
@@ -335,10 +345,10 @@
 							<label><input type="radio" name="icon" value="💻" /><span>💻</span></label>
 							<label><input type="radio" name="icon" value="📱" /><span>📱</span></label>
 							<label><input type="radio" name="icon" value="🏠" /><span>🏠</span></label>
+							<label><input type="radio" name="icon" value="🚶" /><span>🚶</span></label>
 							<label><input type="radio" name="icon" value="📝" /><span>📝</span></label>
 							<label><input type="radio" name="icon" value="🚘" /><span>🚘</span></label>
 							<label><input type="radio" name="icon" value="🎓" /><span>🎓</span></label>
-							<label><input type="radio" name="icon" value="📆" /><span>📆</span></label>
 							<label><input type="radio" name="icon" value="" /><span>none</span></label>
         	</div>
 

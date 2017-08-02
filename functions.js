@@ -36,10 +36,15 @@ Sortable.create(document.getElementById('tasks'), {draggable: ".item",  handle: 
 set_categories();
 open_page("#task_list");
 
-//awesomlete
+//awesomlete edit
 var input_parent = document.getElementById("parent");
 var awesomplete = new Awesomplete(input_parent);
 awesomplete.list = itemList.get_quicklist();
+
+//awesomlete new
+var input_parent2 = document.getElementById("parent2");
+var awesomplete2 = new Awesomplete(input_parent2);
+awesomplete2.list = itemList.get_quicklist();
 
 
 /* PageHandler *******************************************************/

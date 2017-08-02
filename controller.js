@@ -3,6 +3,7 @@
 $(".add-button").click(function() {
    itemList.add_from_form(current_page+" form");
 	awesomplete.list = itemList.get_quicklist();
+	awesomplete2.list = itemList.get_quicklist();
    open_page(previous_page);
 });
 
@@ -60,6 +61,7 @@ $(".delete-button").click(function() {
     if (confirm('Delete "'+itemList.get_item(id).title+'"?')==true) {
 		itemList.remove_item(id);
 		awesomplete.list = itemList.get_quicklist();
+		awesomplete2.list = itemList.get_quicklist();
 		open_page(previous_page);
     }
 });
@@ -183,6 +185,7 @@ $("#task_list input[name='icon']").click(function() {
 $(".save-button").click(function() {
    itemList.edit_from_form(current_page+" form");
 	awesomplete.list = itemList.get_quicklist();
+	awesomplete2.list = itemList.get_quicklist();
    open_page(previous_page);
 });
 
@@ -277,11 +280,29 @@ $(document).on('click', "#task_list .subitem-center", function() {
 */
 
 window.addEventListener("awesomplete-selectcomplete", function(e){
-	str = $("#parent").val()
-	pos = str.indexOf("#");
-	id = parseInt(str.substr(pos+1));
-	$('#edit-item-form input[name="parent_id"]').val(id); 
-	//$(".item-parent-id").val(id);
+	
+	 switch($(e.target)[0].id) 
+        {
+	           case "parent":
+					str = $("#parent").val()
+					pos = str.indexOf("#");
+					id = parseInt(str.substr(pos+1));
+					category = itemList.get_item(id).category;								
+					$('#new-item-form select[name="category"]').val(category); 						
+					$('#edit-item-form input[name="parent_id"]').val(id); 
+                break;
+            case "parent2":
+             	
+					str = $("#parent2").val()
+
+					pos = str.indexOf("#");
+					id = parseInt(str.substr(pos+1));
+					category = itemList.get_item(id).category;								
+					$('#new-item-form select[name="category"]').val(category); 		
+					$('#new-item-form input[name="parent_id"]').val(id); 
+               break;
+         }
+	
 }, false);
 
 
