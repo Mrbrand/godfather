@@ -153,17 +153,18 @@ function view_single_issue (id) {
 	var open_items = itemList.get_all();
 	var open_items_with_meta = [];
 	
-	open_items.forEach(function(item) {
-		open_items_with_meta.push(item_with_meta(item.id));
-	});
-	open_items = open_items_with_meta;
-
+	
 	open_items =open_items
     	.query("finish_date","==","")
     	.query("parent_id", "==", id)
     	.sort(firstBy("order")
     	.thenBy("update_date", -1));
     
+	open_items.forEach(function(item) {
+		open_items_with_meta.push(item_with_meta(item.id));
+	});
+	open_items = open_items_with_meta;
+
     var finished_items = itemList.get_all()
     	.query("finish_date","!=","")
     	.query("parent_id", "==", id)

@@ -223,10 +223,7 @@
 			  <! TITLE>
 				<textarea id="new-item-title" name="title" class="autovalue" placeholder="Title" rows="1" autofocus style="margin-bottom:5px;height:50px; font-size:1.3em; padding-top: 11px;"></textarea><br/>
      			
-			<! PARENT >
-                    <span class="field-description">Parent item in tree</span>
-        					<!input class="autovalue" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
-                    <input id="parent2" class="autovalue"  type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+		
      		 
 			<! CONTEXT>
         		<span class="field-description context">Context</span>  
@@ -252,7 +249,15 @@
 		            <!...>
         		</div>
 
- 			<! PRIO>
+	<! PARENT >
+                    <span class="field-description">Parent item in tree</span>
+        					<!input class="autovalue" type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+                    <input id="parent2" class="autovalue"  type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
+
+  <! NOTES>       
+				<textarea name="notes" class="autovalue" placeholder="Notes" rows="10"></textarea>
+
+ 			<!--PRIO>
             	<span class="field-description">Prio</span>  
 				 <div style="margin: 10px 0;">
 		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
@@ -261,7 +266,7 @@
   						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
   						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
   						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
-        		</div>
+        		</div-->
 
 		<! CATEGORY>
      			<select name="category" class="category_select autovalue">
@@ -302,8 +307,7 @@
 <button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd HH:mm'));  $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(15, 'hour')).format('YYYY-MM-DD ddd HH:mm'));">15:00</button>
 
 
-             <! NOTES>       
-				<textarea name="notes" class="autovalue" placeholder="Notes" rows="10"></textarea>
+           
 				
 			 <! hidden >
                 <input name="order" value="0"  type="hidden" />
