@@ -257,17 +257,6 @@
   <! NOTES>       
 				<textarea name="notes" class="autovalue" placeholder="Notes" rows="10"></textarea>
 
- 			<!--PRIO>
-            	<span class="field-description">Prio</span>  
-				 <div style="margin: 10px 0;">
-		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
-  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
-  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
-  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
-  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
-  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
-        		</div-->
-
 		<! CATEGORY>
      			<select name="category" class="category_select autovalue">
 					<option value="-">-no category-</option>
@@ -306,7 +295,16 @@
 <button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd HH:mm'));  $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(9, 'hour')).format('YYYY-MM-DD ddd HH:mm'));">9:00</button>
 <button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd HH:mm'));  $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(15, 'hour')).format('YYYY-MM-DD ddd HH:mm'));">15:00</button>
 
-
+		<!PRIO>
+            	<span class="field-description">Prio</span>  
+				 <div style="margin: 10px 0;">
+		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
+  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
+  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
+  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
+  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
+  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
+        		</div>
            
 				
 			 <! hidden >

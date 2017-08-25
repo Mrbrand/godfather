@@ -283,7 +283,7 @@ window.addEventListener("awesomplete-selectcomplete", function(e){
 	
 	 switch($(e.target)[0].id) 
         {
-	           case "parent":
+	           case "parent": //new
 					str = $("#parent").val()
 					pos = str.indexOf("#");
 					id = parseInt(str.substr(pos+1));
@@ -291,10 +291,9 @@ window.addEventListener("awesomplete-selectcomplete", function(e){
 					$('#new-item-form select[name="category"]').val(category); 						
 					$('#edit-item-form input[name="parent_id"]').val(id); 
                 break;
-            case "parent2":
-             	
+            
+					case "parent2": //edit             	
 					str = $("#parent2").val()
-
 					pos = str.indexOf("#");
 					id = parseInt(str.substr(pos+1));
 					category = itemList.get_item(id).category;								

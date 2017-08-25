@@ -211,8 +211,6 @@ function view_new (parameters) {
 }
 
 
-
-
 function view_category_list() {
     var categories=itemList.get_all()
     	.query("type", "==", 13)
@@ -221,7 +219,7 @@ function view_category_list() {
     mustache_output("#categories", categories, "#category_template");
 
 	//sätta current_items för sortable	
-	current_items = open_items;
+	current_items = categories;
 }
 
 
