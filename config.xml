@@ -8,8 +8,8 @@
          <widget xmlns   = "http://www.w3.org/ns/widgets"
         xmlns:gap   = "http://phonegap.com/ns/1.0"
         id          = "betarabbit.godfather-new-deal2"
-        versionCode = "16" 
-        version     = "1.2.2">
+        versionCode = "17" 
+        version     = "1.2.4">
 
     <!-- versionCode is optional and Android only -->
 
