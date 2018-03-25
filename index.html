@@ -84,11 +84,13 @@
 					<option value="6">Prio 5</option>
 				</select>
 
-           <button class="new-item-button" style="float:right;" onclick="$('.new-item-div').toggle();">New</button>
+           <button class="new-item-button" style="float:right;" onclick="$('.new-item-div').toggle();">New Task</button>
 				<div class="new-item-div" style="position: absolute; width: 130px; height:300px; right:0; top: 40px; padding:10px; display:none; text-align: right;">
 					<!--button style="margin-bottom: 10px;">Idea</button><br-->
-					<button  class="new-task-button" style="margin-bottom: 10px;"><img src="img/type6.png" align="middle"> Task</button><br>
-					<button  class="new-project-button"  style="margin-bottom: 10px;"><img src="img/type7.png" align="middle"> Project</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"6", parent_id:"", icon:"", prio:"1", category: "2", postpone:""});'>🌅 Solvik</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"6", parent_id:"", icon:"", prio:"1", category: "1", postpone:""});'>🏡 Hemmet</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"6", parent_id:"", icon:"", prio:"1", category: "3", postpone:""});'>🙇 Personligt</button><br>
+					<button style="margin-bottom: 10px;" onclick='view_new({title:title, type:"6", parent_id:"", icon:"", prio:"1", category: "6", postpone:""});'>📢 Engagemang</button><br>
 					<!--button style="margin-bottom: 10px;">Project Group</button><br>
 					<button style="margin-bottom: 10px;">Document</button-->				
 				</div>
@@ -103,7 +105,6 @@
 				<button style="float:right; margin-right:5px; ">Folder</button>
 				<button style="float:right; margin-right:5px; ">Doc</button>
         	</div><!-- end controls-->
-
 
 		<! Extra Controls>
 			<div id="extra-controls" class="controls" style="height:40px; padding: 5px; display:none;">
@@ -155,16 +156,16 @@
 		<!--button class="home-button"><img src="img/home16.png"</button-->
 		<button onclick="open_page('#task_list');" style="float:left;">Back</button>
 		<button class="up-button" style="float:left; margin-left:5px;">Up</button>
-       <button class="new-item-bu" onclick="$('.new-item-div').toggle();" style="float:right;">New</button>
-        <div class="new-item-div" style="position: absolute; width: 130px; height:300px; right:0; top: 100px; padding:10px; display:none; text-align: right;">
-				<!--button style="margin-bottom: 10px;">Idea</button><br-->
-				<button  class="new-task-button" style="margin-bottom: 10px;"><img src="img/type6.png" align="middle"> Task</button><br>
-				<button  class="new-project-button"  style="margin-bottom: 10px;"><img src="img/type7.png" align="middle"> Project</button><br>
-				<!--button style="margin-bottom: 10px;">Project Group</button><br>
-				<button style="margin-bottom: 10px;">Document</button-->				
-			</div>
-        <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
-        <! input id="search-item" onkeyup="view_item(current.id);" style="float:right; margin-right:10px;width:150px;" placeholder="Filter"/>
+     <button class="new-task-button" style="float:right;">New Task</button>
+      <!--div class="new-item-div" style="position: absolute; width: 130px; height:300px; right:0; top: 100px; padding:10px; display:none; text-align: right;">
+			<!--button style="margin-bottom: 10px;">Idea</button><br-->
+			<!--button  class="new-task-button" style="margin-bottom: 10px;"><img src="img/type6.png" align="middle"> Task</button><br>
+			<!button  class="new-project-button"  style="margin-bottom: 10px;"><img src="img/type7.png" align="middle"> Project</button><br>
+			<!--button style="margin-bottom: 10px;">Project Group</button><br>
+			<button style="margin-bottom: 10px;">Document</button-->				
+		<!--/div-->
+    <! img src="img/search.png" onclick="to_search();" style="float:right; margin-right:5px;"/>
+    <! input id="search-item" onkeyup="view_item(current.id);" style="float:right; margin-right:10px;width:150px;" placeholder="Filter"/>
 
 	</div><!-- end controls-->
 	
@@ -255,7 +256,7 @@
                     <input id="parent2" class="autovalue"  type="text" placeholder="Type item name or id" style="margin-bottom:5px;height:40px; font-size:1.1em; width: 100%;"/>	
 
   <! NOTES>       
-				<textarea name="notes" class="autovalue" placeholder="Notes" rows="10"></textarea>
+				<textarea name="notes" class="autovalue" placeholder="Notes" rows="5"></textarea>
 
 		<! CATEGORY>
      			<select name="category" class="category_select autovalue">
@@ -295,16 +296,17 @@
 <button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd HH:mm'));  $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(9, 'hour')).format('YYYY-MM-DD ddd HH:mm'));">9:00</button>
 <button type="button" style="margin-right:5px; margin-bottom:5px;" onclick="if($('#postpone').val()=='') $('#postpone').val(moment().format('YYYY-MM-DD ddd HH:mm'));  $('#postpone').val((moment($('#postpone').val(), 'YYYY-MM-DD-ddd').add(15, 'hour')).format('YYYY-MM-DD ddd HH:mm'));">15:00</button>
 
-		<!PRIO>
-            	<span class="field-description">Prio</span>  
-				 <div style="margin: 10px 0;">
-		           <label><input type="radio" name="prio" value="1" /><img src="img/prio1.png"></label>
-  						<label><input type="radio" name="prio" value="2" /><img src="img/prio2.png"></label>
-  						<label><input type="radio" name="prio" value="3" /><img src="img/prio3.png"></label>
-  						<label><input type="radio" name="prio" value="4" /><img src="img/prio4.png"></label>
-  						<label><input type="radio" name="prio" value="5" /><img src="img/prio5.png"></label>
-  						<label><input type="radio" name="prio" value="6" /><img src="img/none.png"></label>
-        		</div>
+		
+          <! TYPE >
+						<select name="type" class="autovalue">
+							<option value="4">Idea</option>
+							<option value="6">Task</option>
+							<option value="7">Project</option>
+							<option value="16">Direction</option>
+							<option value="17">Folder</option>
+							<option value="100">Document</option>
+						</select>      
+						
            
 				
 			 <! hidden >
@@ -341,7 +343,7 @@
 				<input class="autovalue" name="title" type="text" style="margin-bottom:5px; height:50px; font-size:1.3em"/><br/>
 				
 			<! CONTEXT>
-        		<span class="field-description">Context</span>  
+        	<span class="field-description">Context</span>  
   
   				<div class="task-icons icons" style="margin: 10px 0;">
 		           <label><input type="radio" name="icon" value="📞" /><span>📞</span></label>
